@@ -3,7 +3,7 @@ import { useRef } from "react";
 import AnimatedSection from "./AnimatedSection";
 import GoldDivider from "./GoldDivider";
 import { Phone, PenTool, Code, Rocket } from "lucide-react";
-import mosqueDome from "@/assets/heart-math.jpg";
+import mosqueDome from "@/assets/neon-cube.jpg";
 
 const steps = [
   {
@@ -47,7 +47,7 @@ const FrameworkSection = () => {
         <motion.img
           src={mosqueDome}
           alt=""
-          className="w-full h-[120%] object-cover object-[30%_50%]"
+          className="w-full h-[120%] object-cover object-center"
           style={{
             y: bgY,
             filter: "saturate(0.6) brightness(0.45)",
