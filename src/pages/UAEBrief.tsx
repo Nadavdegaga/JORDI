@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import GrainOverlay from "@/components/GrainOverlay";
+import ContactDialog from "@/components/ContactDialog";
 import {
   Landmark, Brain, Shield, HeartPulse, Truck, Building2, Zap, ShoppingBag,
   ArrowRight, Loader2, AlertTriangle, TrendingUp, Target, MapPin, ChevronLeft
