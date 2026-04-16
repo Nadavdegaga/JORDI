@@ -85,7 +85,7 @@ const LeadershipSection = () => {
         </div>
 
         {/* Executive row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto">
           {executives.map((exec, index) => (
             <AnimatedSection key={index} delay={0.4 + index * 0.1}>
               <div
