@@ -47,7 +47,7 @@ const FrameworkSection = () => {
         <motion.img
           src={mosqueDome}
           alt=""
-          className="w-full h-[120%] object-cover object-[30%_50%]"
+          className="w-full h-[120%] object-cover object-center"
           style={{
             y: bgY,
             filter: "saturate(0.6) brightness(0.45)",
