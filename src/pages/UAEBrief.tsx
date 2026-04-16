@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import GrainOverlay from "@/components/GrainOverlay";
+import ContactDialog from "@/components/ContactDialog";
 import {
   Landmark, Brain, Shield, HeartPulse, Truck, Building2, Zap, ShoppingBag,
   ArrowRight, Loader2, AlertTriangle, TrendingUp, Target, MapPin, ChevronLeft
@@ -27,9 +28,10 @@ const revenues = ["טרם הכנסות", "₪0–₪50K", "₪50K–₪200K", "�
 
 interface BriefData {
   fitSummary: { level: string; reasoning: string };
-  marketSize: { tam: string; sam: string; som: string; assumptions: string };
-  growthDrivers: string[];
-  goToMarket: { step: string; detail: string }[];
+  automations: { process: string; description: string; savingsEstimate: string; complexity: string }[];
+  totalSavings: { monthlyCostSaving: string; monthlyTimeSaving: string; revenueGrowthPotential: string; assumptions: string };
+  quickWins: string[];
+  roadmap: { step: string; detail: string; timeline: string }[];
   risks: string[];
 }
 
@@ -262,27 +264,27 @@ const UAEBrief = () => {
               <div className="text-center mb-12">
                 <p className="text-label text-primary/60 tracking-[0.3em] mb-2">ניתוח מותאם</p>
                 <h2 className="font-serif text-2xl md:text-3xl font-light text-foreground tracking-[0.02em]">
-                  {form.companyName} — הערכת שוק
+                  {form.companyName} — פוטנציאל אוטומציה
                 </h2>
                 <div className="w-16 h-px bg-gradient-gold mx-auto mt-6" />
               </div>
 
-              <BriefSection title="הערכת התאמה אסטרטגית" icon={Target} delay={0.1}>
+              <BriefSection title="פוטנציאל אוטומציה כללי" icon={Target} delay={0.1}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className={`font-serif text-3xl font-light ${fitColor(brief.fitSummary.level)}`}>
                     {brief.fitSummary.level}
                   </span>
-                  <span className="text-xs text-muted-foreground/60 uppercase tracking-widest">ציון התאמה</span>
+                  <span className="text-xs text-muted-foreground/60 uppercase tracking-widest">דירוג פוטנציאל</span>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">{brief.fitSummary.reasoning}</p>
               </BriefSection>
 
-              <BriefSection title="הערכת גודל שוק" icon={TrendingUp} delay={0.2}>
+              <BriefSection title="הערכת חיסכון כוללת" icon={TrendingUp} delay={0.2}>
                 <div className="grid grid-cols-3 gap-4 mb-4">
                   {[
-                    { label: "TAM", value: brief.marketSize.tam },
-                    { label: "SAM", value: brief.marketSize.sam },
-                    { label: "SOM", value: brief.marketSize.som },
+                    { label: "חיסכון חודשי", value: brief.totalSavings.monthlyCostSaving },
+                    { label: "שעות נחסכות", value: brief.totalSavings.monthlyTimeSaving },
+                    { label: "גידול הכנסות", value: brief.totalSavings.revenueGrowthPotential },
                   ].map((m) => (
                     <div key={m.label} className="text-center p-4 rounded-lg border border-border/20 bg-card/20">
                       <p className="text-label text-primary/50 text-[10px] mb-2">{m.label}</p>
@@ -290,12 +292,31 @@ const UAEBrief = () => {
                     </div>
                   ))}
                 </div>
-                <p className="text-xs text-muted-foreground/60 italic">{brief.marketSize.assumptions}</p>
+                <p className="text-xs text-muted-foreground/60 italic">{brief.totalSavings.assumptions}</p>
               </BriefSection>
 
-              <BriefSection title="מנועי צמיחה" icon={Zap} delay={0.3}>
+              <BriefSection title="תהליכים לאוטומציה" icon={Zap} delay={0.3}>
+                <div className="space-y-5">
+                  {brief.automations.map((a, i) => (
+                    <div key={i} className="p-4 rounded-lg border border-border/20 bg-card/10">
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="font-serif text-base text-foreground">{a.process}</p>
+                        <span className={`text-[10px] tracking-widest uppercase px-2 py-0.5 rounded ${
+                          a.complexity === "קל" ? "text-green-400 bg-green-400/10" :
+                          a.complexity === "בינוני" ? "text-yellow-400 bg-yellow-400/10" :
+                          "text-red-400 bg-red-400/10"
+                        }`}>{a.complexity}</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-1">{a.description}</p>
+                      <p className="text-xs text-primary/60">חיסכון מוערך: {a.savingsEstimate}</p>
+                    </div>
+                  ))}
+                </div>
+              </BriefSection>
+
+              <BriefSection title="שיפורים מהירים" icon={Zap} delay={0.35}>
                 <ul className="space-y-3">
-                  {brief.growthDrivers.map((d, i) => (
+                  {brief.quickWins.map((d, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <ChevronLeft className="w-3 h-3 text-primary/50 mt-1.5 shrink-0" />
                       <span className="text-sm text-muted-foreground leading-relaxed">{d}</span>
@@ -304,15 +325,18 @@ const UAEBrief = () => {
                 </ul>
               </BriefSection>
 
-              <BriefSection title="מסלול כניסה מומלץ" icon={MapPin} delay={0.4}>
+              <BriefSection title="מפת דרכים מומלצת" icon={MapPin} delay={0.4}>
                 <div className="space-y-6">
-                  {brief.goToMarket.map((g, i) => (
+                  {brief.roadmap.map((g, i) => (
                     <div key={i} className="flex items-start gap-4">
                       <span className="text-label text-primary/40 text-xs mt-1 shrink-0 w-6">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <div>
-                        <p className="font-serif text-lg text-foreground mb-1">{g.step}</p>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <p className="font-serif text-lg text-foreground">{g.step}</p>
+                          <span className="text-[10px] text-muted-foreground/50 tracking-widest">{g.timeline}</span>
+                        </div>
                         <p className="text-sm text-muted-foreground leading-relaxed">{g.detail}</p>
                       </div>
                     </div>
@@ -353,42 +377,7 @@ const UAEBrief = () => {
         </AnimatePresence>
       </div>
 
-      {/* Contact Modal */}
-      <AnimatePresence>
-        {showContact && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center px-6"
-          >
-            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setShowContact(false)} />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="relative bg-card border border-border/50 rounded-lg p-10 max-w-md w-full"
-            >
-              <p className="text-label text-primary mb-4 tracking-[0.2em]">בואו נדבר</p>
-              <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
-                לשיחה על איך נוכל לעזור לעסק שלכם, שלחו לנו הודעה ונחזור אליכם בהקדם.
-              </p>
-              <a
-                href="mailto:tayaryardenn@gmail.com"
-                className="block w-full text-center text-label tracking-[0.2em] text-primary-foreground bg-primary/90 hover:bg-primary px-8 py-4 rounded-lg transition-all duration-500 cta-glow"
-              >
-                שלחו אימייל
-              </a>
-              <button
-                onClick={() => setShowContact(false)}
-                className="mt-4 w-full text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-pointer"
-              >
-                סגור
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <ContactDialog open={showContact} onOpenChange={setShowContact} />
     </main>
   );
 };
