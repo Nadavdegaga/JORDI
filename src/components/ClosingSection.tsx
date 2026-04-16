@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import TextReveal from "./TextReveal";
+import ContactDialog from "./ContactDialog";
 import heroGlobe from "@/assets/geo-sphere.jpg";
 
 const ClosingSection = () => {
@@ -11,6 +12,7 @@ const ClosingSection = () => {
   const isInView = useInView(lineRef, { once: true, margin: "-80px" });
   const [showTerms, setShowTerms] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showContact, setShowContact] = useState(false);
 
   return (
     <section className="relative overflow-hidden">
@@ -56,12 +58,12 @@ const ClosingSection = () => {
 
           <AnimatedSection delay={1}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-              <a
-                href="mailto:tayaryardenn@gmail.com"
-                className="inline-block text-label text-primary/70 hover:text-primary border border-primary/20 hover:border-primary/40 px-8 py-4 rounded transition-all duration-700 cta-glow tracking-[0.3em]"
+              <button
+                onClick={() => setShowContact(true)}
+                className="inline-block text-label text-primary/70 hover:text-primary border border-primary/20 hover:border-primary/40 px-8 py-4 rounded transition-all duration-700 cta-glow tracking-[0.3em] cursor-pointer"
               >
                 בואו נדבר
-              </a>
+              </button>
               <Link
                 to="/business-brief"
                 className="inline-block text-label text-primary-foreground bg-primary/80 hover:bg-primary px-8 py-4 rounded transition-all duration-700 cta-glow tracking-[0.3em]"
@@ -197,6 +199,8 @@ const ClosingSection = () => {
           </div>
         </div>
       )}
+
+      <ContactDialog open={showContact} onOpenChange={setShowContact} />
     </section>
   );
 };
