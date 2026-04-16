@@ -2,16 +2,16 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useRef, useState } from "react";
 import AnimatedSection from "./AnimatedSection";
 import GoldDivider from "./GoldDivider";
-import { Shield, Swords, Landmark, HardHat, Truck, HeartPulse } from "lucide-react";
+import { Zap, Smartphone, Link2, Bot, BarChart3, Globe } from "lucide-react";
 import dubaiSkyline from "@/assets/hero-emirates-fog.jpg";
 
 const sectors = [
-  { icon: Shield, label: "AI Cybersecurity", insight: "The UAE's enterprise sector is investing heavily in cyber defense infrastructure, creating a $1.5B+ market for AI-driven threat detection and data protection solutions." },
-  { icon: Swords, label: "AI Defense", insight: "With the UAE emerging as a top global defense spender, autonomous systems and AI-powered intelligence platforms represent significant commercial opportunities." },
-  { icon: Landmark, label: "AI Fintech", insight: "Dubai's DIFC and ADGM are positioning as global fintech hubs, driving demand for AI-powered compliance, fraud detection, and Islamic finance automation." },
-  { icon: HardHat, label: "AI Construction", insight: "Mega-projects across the UAE demand AI-driven project management, predictive maintenance, and smart building technologies at unprecedented scale." },
-  { icon: Truck, label: "AI Logistics", insight: "As a global trade hub connecting East and West, the UAE requires next-generation AI logistics for ports, free zones, and last-mile delivery optimization." },
-  { icon: HeartPulse, label: "AI Healthtech", insight: "The UAE's world-class healthcare infrastructure is accelerating adoption of AI diagnostics, personalized medicine, and hospital automation." },
+  { icon: Zap, label: "אוטומציות עסקיות", insight: "חיבור מערכות, אוטומציית תהליכים, העברת מידע אוטומטית בין פלטפורמות — כל מה שחוסך עבודה ידנית חוזרת ומייעל את העסק שלכם." },
+  { icon: Smartphone, label: "אפליקציות מותאמות", insight: "פיתוח אפליקציות ווב ומובייל מותאמות אישית — דשבורדים, מערכות CRM, כלי ניהול פרויקטים וכל מה שהעסק שלכם צריך." },
+  { icon: Link2, label: "אינטגרציות ו-API", insight: "חיבור בין WhatsApp, Gmail, Google Calendar, מערכות הנהלת חשבונות ועוד — הכל מדבר עם הכל בצורה חלקה." },
+  { icon: Bot, label: "פתרונות AI", insight: "ניתוח מסמכים אוטומטי, עיבוד טקסט חכם, צ׳אטבוטים ופתרונות מבוססי בינה מלאכותית שמייעלים את העבודה." },
+  { icon: BarChart3, label: "דשבורדים וניהול", insight: "מסכי ניהול מרכזיים שמרכזים את כל הנתונים שלכם במקום אחד — קבלת החלטות מבוססת דאטה בזמן אמת." },
+  { icon: Globe, label: "פתרונות דיגיטליים", insight: "אתרים, דפי נחיתה, חנויות מקוונות ופתרונות דיגיטליים מקצה לקצה שמביאים תוצאות עסקיות." },
 ];
 
 const PortfolioSection = () => {
@@ -44,13 +44,13 @@ const PortfolioSection = () => {
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
             <p className="text-label text-primary mb-4 text-center">
-              Commercial Portfolio
+              תחומי ההתמחות
             </p>
           </AnimatedSection>
 
           <AnimatedSection delay={0.15}>
             <h2 className="heading-section text-center text-foreground mb-6">
-              AI <span className="text-gradient-gold">Verticals</span>
+              מה אנחנו <span className="text-gradient-gold">עושים</span>
             </h2>
           </AnimatedSection>
 
@@ -108,7 +108,7 @@ const PortfolioSection = () => {
 
           <AnimatedSection delay={0.6}>
             <p className="text-body text-muted-foreground text-center mt-12 text-sm italic">
-              Focused on high-growth, institutional-grade AI applications.
+              פתרונות מותאמים אישית לכל סוג של עסק.
             </p>
           </AnimatedSection>
         </div>

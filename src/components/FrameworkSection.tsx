@@ -2,33 +2,33 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import AnimatedSection from "./AnimatedSection";
 import GoldDivider from "./GoldDivider";
-import { Search, Filter, Settings, Building } from "lucide-react";
+import { Phone, PenTool, Code, Rocket } from "lucide-react";
 import mosqueDome from "@/assets/dubai-aerial-night.jpg";
 
 const steps = [
   {
-    icon: Search,
-    title: "Elite Scouting & Intelligence",
+    icon: Phone,
+    title: "שיחת היכרות",
     description:
-      "Global intelligence networks in Tel Aviv & Silicon Valley identifying high-potential technologies before markets react.",
+      "מבינים את העסק, את האתגרים ואת החלום.",
   },
   {
-    icon: Filter,
-    title: "Rigorous Vetting — The 1% Rule",
+    icon: PenTool,
+    title: "תכנון ועיצוב",
     description:
-      "Hundreds evaluated, only the top 1% selected for commercial fit, technical readiness, and institutional alignment.",
+      "בונים מוק-אפ ומאשרים שזה בדיוק מה שרציתם.",
   },
   {
-    icon: Settings,
-    title: "Market Adaptation & Localization",
+    icon: Code,
+    title: "פיתוח וחיבור",
     description:
-      "Technologies adapted to local culture, regulation, and enterprise needs — not off-the-shelf imports.",
+      "מפתחים, מחברים אינטגרציות ובודקים הכל.",
   },
   {
-    icon: Building,
-    title: "Commercial Integration & Growth",
+    icon: Rocket,
+    title: "השקה וליווי",
     description:
-      "Direct deployment into enterprise and institutional channels via trusted local networks and established frameworks.",
+      "משיקים ומלווים אתכם עד שהכל רץ חלק.",
   },
 ];
 
@@ -60,7 +60,7 @@ const FrameworkSection = () => {
       {/* Label strip */}
       <div className="relative z-10 pt-24 pb-4 px-6 md:px-12 lg:px-24 xl:px-32">
         <div className="max-w-6xl mx-auto">
-          <p className="text-label text-primary/40 tracking-[0.4em]">Commercial Infrastructure</p>
+          <p className="text-label text-primary/40 tracking-[0.4em]">תהליך העבודה</p>
         </div>
       </div>
 
@@ -68,13 +68,13 @@ const FrameworkSection = () => {
         <div className="max-w-6xl mx-auto">
           <AnimatedSection>
             <p className="text-label text-primary mb-4 text-center">
-              Execution Framework
+              איך זה עובד
             </p>
           </AnimatedSection>
 
           <AnimatedSection delay={0.15}>
             <h2 className="heading-section text-center text-foreground mb-6">
-              The RoyalX <span className="text-gradient-gold">Process</span>
+              4 צעדים ל<span className="text-gradient-gold">מערכת חלומות</span>
             </h2>
           </AnimatedSection>
 
@@ -93,7 +93,7 @@ const FrameworkSection = () => {
                         <Icon className="w-4 h-4 text-primary/70 group-hover:text-primary transition-colors duration-500" />
                       </div>
                       <span className="text-label text-muted-foreground text-xs">
-                        Phase {String(index + 1).padStart(2, "0")}
+                        שלב {String(index + 1).padStart(2, "0")}
                       </span>
                     </div>
 

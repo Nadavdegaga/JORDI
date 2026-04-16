@@ -9,24 +9,24 @@ import cgoPhoto from "@/assets/cgo-photo.jpg";
 
 const leaders = [
   {
-    role: "Chairman",
+    role: "מייסד",
     tier: "principal",
     image: null,
     bio: null,
   },
   {
-    role: "Advisory Board",
+    role: "יועץ בכיר",
     tier: "principal",
     image: advisoryPhoto,
-    name: "Roei Friedberg",
-    bio: "Executive Wisdom: Veteran High-Tech CEO and Founder with a distinguished background in the Prime Minister's Office (Strategic Sector). Shared Legacy: Holds a BA in Government & Strategy from Reichman University ensuring a cohesive and aligned strategic vision.",
+    name: "רועי פרידברג",
+    bio: "יזם טכנולוגי ותיק עם ניסיון רב בהקמת וניהול חברות הייטק. רקע בתחום האסטרטגיה, בוגר ממשל ואסטרטגיה מהמרכז הבינתחומי.",
   },
 ];
 
 const executives = [
-  { role: "CSO", title: "Chief Strategy Officer", name: "Nadav Degaga", image: csoPhoto, imagePos: "center 20%", bio: "The Growth Engine: Math and Economics (BA, Tel Aviv University) turned entrepreneur, expert in scaling international ventures from concept to market leadership. Revenue Architect: Former VP Sales at leading tech firms (Sumit-AI), specializing in high-performance revenue strategies and global market entry." },
-  { role: "CEO", title: "Chief Executive Officer", name: "Hassan Farraj", image: ceoPhoto, bio: "Elite Leadership & Growth: Former VP of Partnerships & Growth in leading High-Tech firms, combining corporate scaling expertise with a distinguished command background in National Special Operations. Strategic Foundation: Holds a B.A. in Government, Diplomacy & Strategy from Reichman University. A specialist in cross-cultural negotiation and mission-critical execution in high-stakes environments." },
-  { role: "CGO", title: "Chief Growth Officer", name: "Mahmod Edres", image: cgoPhoto, bio: "Government Authority & Academic Foundation: A prominent Emirati business leader holding a B.A. in Business Administration. Manages vital government service center and legal consultancy firms, ensuring seamless regulatory navigation. Local Roots: Deeply embedded in the UAE business ecosystem with a proven track record of founding and scaling successful local enterprises like Al Banoosh & Albana Brothers." },
+  { role: "סמנכ״ל אסטרטגיה", title: "אסטרטגיה ופיתוח עסקי", name: "נדב דגגה", image: csoPhoto, imagePos: "center 20%", bio: "בוגר מתמטיקה וכלכלה מאוניברסיטת תל אביב. יזם מנוסה בהרחבת עסקים בינלאומיים מקונספט ועד למובילות שוק. מומחה באסטרטגיות צמיחה ומכירות." },
+  { role: "מנכ״ל", title: "ניהול כללי ושותפויות", name: "חסן פראג׳", image: ceoPhoto, bio: "מנהל בכיר עם ניסיון בשותפויות וצמיחה בחברות הייטק מובילות. רקע בניהול מבצעי ומומחיות במשא ומתן בין-תרבותי. בוגר ממשל, דיפלומטיה ואסטרטגיה מהמרכז הבינתחומי." },
+  { role: "סמנכ״ל צמיחה", title: "צמיחה ופיתוח שוק", name: "מחמוד אדריס", image: cgoPhoto, bio: "מנהיג עסקי בולט עם תואר ראשון במנהל עסקים. מנהל מרכז שירותים ומשרד ייעוץ עסקי, עם ניסיון רב בהקמה ובהרחבה של עסקים מקומיים." },
 ];
 
 type Person = {
@@ -52,19 +52,19 @@ const LeadershipSection = () => {
       <div className="max-w-5xl mx-auto">
         <AnimatedSection>
           <p className="text-label text-primary mb-4 text-center">
-            Governance
+            הצוות שלנו
           </p>
         </AnimatedSection>
 
         <AnimatedSection delay={0.15}>
           <h2 className="heading-section text-center text-foreground mb-6">
-            Leadership & <span className="text-gradient-gold">Strategic Trust</span>
+            הנהגה ו<span className="text-gradient-gold">אמון מקצועי</span>
           </h2>
         </AnimatedSection>
 
         <AnimatedSection delay={0.25}>
           <p className="text-body text-muted-foreground text-center max-w-xl mx-auto mb-6 text-sm">
-            Credibility through governance, cross-border execution, and institutional alignment.
+            צוות מנוסה שמביא מקצועיות, אמינות וביצוע מדויק.
           </p>
         </AnimatedSection>
 
@@ -156,7 +156,7 @@ const LeadershipSection = () => {
                       className="w-full h-full object-cover"
                       style={{ objectPosition: activePerson.imagePos || "center top", filter: "saturate(0.85)" }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-card/20 hidden md:block" />
+                    <div className="absolute inset-0 bg-gradient-to-l from-transparent to-card/20 hidden md:block" />
                     <div className="absolute inset-0 bg-gradient-to-t from-card/40 to-transparent md:hidden" />
                   </div>
                 )}
@@ -180,7 +180,7 @@ const LeadershipSection = () => {
                     onClick={() => setActivePerson(null)}
                     className="mt-8 text-label text-xs text-muted-foreground/50 hover:text-primary tracking-[0.2em] transition-colors duration-500 cursor-pointer"
                   >
-                    Close
+                    סגור
                   </button>
                 </div>
               </div>
