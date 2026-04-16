@@ -10,8 +10,8 @@ import cgoPhoto from "@/assets/cgo-photo.jpg";
 const leaders: Person[] = [];
 
 const executives = [
-  { role: "אסטרטגיה ותפעול", title: "אסטרטגיה ותפעול", name: "נדב דגגה", image: csoPhoto, imagePos: "center 20%", bio: "בוגר מתמטיקה וכלכלה מאוניברסיטת תל אביב. יזם מנוסה בהרחבת עסקים בינלאומיים מקונספט ועד למובילות שוק. מומחה באסטרטגיות צמיחה ומכירות." },
-  { role: "מחקר ופיתוח", title: "מחקר ופיתוח", name: "ירדן טייר", image: null, bio: null },
+  { role: "שותף מייסד", title: "מחקר ופיתוח", name: "ירדן טייר", image: null, bio: null },
+  { role: "שותף מייסד", title: "אסטרטגיה ותפעול", name: "נדב דגגה", image: csoPhoto, imagePos: "center 20%", bio: "בוגר מתמטיקה וכלכלה מאוניברסיטת תל אביב. יזם מנוסה בהרחבת עסקים בינלאומיים מקונספט ועד למובילות שוק. מומחה באסטרטגיות צמיחה ומכירות." },
 ];
 
 type Person = {
