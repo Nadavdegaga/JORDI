@@ -1,16 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react";
 
 const sections = [
-  { id: "hero", label: "Home" },
-  { id: "opportunity", label: "Opportunity" },
-  { id: "what-is", label: "What Is RoyalX" },
-  { id: "framework", label: "Framework" },
-  { id: "portfolio", label: "Portfolio" },
-  { id: "leadership", label: "Leadership" },
-  { id: "closing", label: "Contact" },
+  { id: "hero", label: "ראשי" },
+  { id: "services", label: "שירותים" },
+  { id: "what-is", label: "למה אנחנו" },
+  { id: "framework", label: "תהליך עבודה" },
+  { id: "portfolio", label: "תחומי התמחות" },
+  { id: "leadership", label: "הצוות" },
+  { id: "closing", label: "צור קשר" },
 ];
 
 const HamburgerNav = () => {
@@ -38,8 +37,8 @@ const HamburgerNav = () => {
       {/* Hamburger button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-6 right-6 z-50 flex flex-col gap-[5px] cursor-pointer group"
-        aria-label="Navigation menu"
+        className="fixed top-6 left-6 z-50 flex flex-col gap-[5px] cursor-pointer group"
+        aria-label="תפריט ניווט"
       >
         <motion.span
           animate={isOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
@@ -89,16 +88,16 @@ const HamburgerNav = () => {
                 className="h-px bg-gradient-gold my-2"
               />
 
-              {/* UAE Brief link */}
+              {/* Business Brief link */}
               <motion.button
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.4, delay: 0.45 }}
-                onClick={() => { setIsOpen(false); navigate("/uae-brief"); }}
+                onClick={() => { setIsOpen(false); navigate("/business-brief"); }}
                 className="text-label text-primary/70 hover:text-primary tracking-[0.3em] transition-colors duration-500 cursor-pointer border border-primary/20 hover:border-primary/40 px-6 py-3 rounded cta-glow"
               >
-                UAE Opportunity Brief
+                ניתוח עסקי מהיר
               </motion.button>
             </nav>
           </motion.div>

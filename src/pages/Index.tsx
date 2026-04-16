@@ -31,16 +31,16 @@ const Index = () => {
       <div id="leadership"><LeadershipSection /></div>
       <div id="closing"><ClosingSection /></div>
 
-      {/* Floating CTA to UAE Brief */}
+      {/* Floating CTA to Business Brief */}
       <motion.button
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 2, duration: 0.5 }}
-        onClick={() => navigate("/uae-brief")}
-        className="fixed bottom-6 left-6 z-50 flex items-center gap-2 px-5 py-3 rounded-full border border-primary/30 bg-background/80 backdrop-blur-md text-primary hover:bg-primary/10 hover:border-primary/60 transition-all duration-500 shadow-lg shadow-primary/10 cursor-pointer group"
+        onClick={() => navigate("/business-brief")}
+        className="fixed bottom-6 right-20 z-50 flex items-center gap-2 px-5 py-3 rounded-full border border-primary/30 bg-background/80 backdrop-blur-md text-primary hover:bg-primary/10 hover:border-primary/60 transition-all duration-500 shadow-lg shadow-primary/10 cursor-pointer group"
       >
         <FileText className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
-        <span className="text-xs tracking-[0.15em] font-medium uppercase">UAE Brief</span>
+        <span className="text-xs tracking-[0.15em] font-medium uppercase">ניתוח עסקי</span>
       </motion.button>
 
       <AccessibilityWidget />

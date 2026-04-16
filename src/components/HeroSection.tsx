@@ -13,7 +13,7 @@ const HeroSection = () => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
   const scrollToContent = () => {
-    const el = document.getElementById("opportunity");
+    const el = document.getElementById("services");
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -41,13 +41,14 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.3 }}
           className="text-label text-primary mb-8 tracking-[0.3em]"
         >
-          Strategic Advisory
+          אוטומציה עסקית
         </motion.p>
 
         <h1 className="heading-display text-foreground mb-6 tracking-[0.02em]">
-          <TextReveal delay={0.6}>Royal</TextReveal>
-          <span className="text-gradient-gold"><TextReveal delay={0.8}>X</TextReveal></span>
-          <TextReveal delay={0.9}> — Advisory & Growth</TextReveal>
+          <TextReveal delay={0.6}>הפכו את העסק שלכם</TextReveal>
+          <br />
+          <TextReveal delay={0.8}>ל</TextReveal>
+          <span className="text-gradient-gold"><TextReveal delay={0.9}>מכונה חכמה</TextReveal></span>
         </h1>
 
         <motion.div
@@ -63,8 +64,8 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 1.2 }}
           className="text-body text-muted-foreground max-w-xl mx-auto mb-12"
         >
-          An institutional-grade advisory platform connecting elite global
-          AI innovation with UAE commercial opportunities.
+          אנחנו בונים מערכות אוטומציה, אפליקציות ופתרונות דיגיטליים מותאמים
+          אישית שחוסכים לכם זמן, כסף וכאב ראש. מהרעיון ועד המוצר — אנחנו מטפלים בהכל.
         </motion.p>
 
         <motion.button
@@ -74,7 +75,7 @@ const HeroSection = () => {
           onClick={scrollToContent}
           className="text-label text-primary/80 hover:text-primary transition-colors duration-500 cursor-pointer group tracking-[0.3em]"
         >
-          Explore the Framework
+          מה אנחנו עושים ←
           <motion.span
             className="block mt-3 mx-auto w-px h-8 bg-primary/40 group-hover:bg-primary/70 transition-colors duration-500"
             animate={{ opacity: [0.3, 0.8, 0.3] }}

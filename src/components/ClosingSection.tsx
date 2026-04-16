@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Linkedin, Facebook, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import TextReveal from "./TextReveal";
 import heroGlobe from "@/assets/hero-globe.jpg";
@@ -30,13 +30,13 @@ const ClosingSection = () => {
 
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h2 className="heading-display text-foreground mb-2">
-            <TextReveal>Precision.</TextReveal>
+            <TextReveal>אוטומציה.</TextReveal>
           </h2>
           <h2 className="heading-display text-gradient-gold mb-2">
-            <TextReveal delay={0.25}>Adaptation.</TextReveal>
+            <TextReveal delay={0.25}>התאמה.</TextReveal>
           </h2>
           <h2 className="heading-display text-foreground mb-10">
-            <TextReveal delay={0.5}>Growth.</TextReveal>
+            <TextReveal delay={0.5}>צמיחה.</TextReveal>
           </h2>
 
           <div ref={lineRef} className="flex justify-center mb-10">
@@ -50,40 +50,35 @@ const ClosingSection = () => {
 
           <AnimatedSection delay={0.8}>
             <p className="text-body text-muted-foreground max-w-xl mx-auto mb-16">
-              RoyalX exists to bridge global innovation with commercial opportunity.
+              יש לכם רעיון? תהליך שרוצים לייעל? מוצר שרוצים לבנות? ספרו לנו ונחזור אליכם תוך 24 שעות.
             </p>
           </AnimatedSection>
 
           <AnimatedSection delay={1}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
               <a
-                href="mailto:contact@royalx.ae"
+                href="mailto:tayaryardenn@gmail.com"
                 className="inline-block text-label text-primary/70 hover:text-primary border border-primary/20 hover:border-primary/40 px-8 py-4 rounded transition-all duration-700 cta-glow tracking-[0.3em]"
               >
-                Private Introduction
+                בואו נדבר
               </a>
               <Link
-                to="/uae-brief"
+                to="/business-brief"
                 className="inline-block text-label text-primary-foreground bg-primary/80 hover:bg-primary px-8 py-4 rounded transition-all duration-700 cta-glow tracking-[0.3em]"
               >
-                UAE Opportunity Brief
+                ניתוח עסקי מהיר
               </Link>
             </div>
           </AnimatedSection>
 
-          {/* Social icons */}
+          {/* Contact info */}
           <AnimatedSection delay={1.1}>
             <div className="flex items-center justify-center gap-5 mb-8">
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-border/40 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all duration-500" aria-label="LinkedIn">
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-border/40 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all duration-500" aria-label="Facebook">
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a href="mailto:contact@royalx.ae" className="w-10 h-10 rounded-full border border-border/40 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all duration-500" aria-label="Email">
+              <a href="mailto:tayaryardenn@gmail.com" className="w-10 h-10 rounded-full border border-border/40 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 transition-all duration-500" aria-label="אימייל">
                 <Mail className="w-4 h-4" />
               </a>
             </div>
+            <p className="text-xs text-muted-foreground/50">📧 tayaryardenn@gmail.com &nbsp;|&nbsp; 📍 ישראל</p>
           </AnimatedSection>
         </div>
       </div>
@@ -94,29 +89,34 @@ const ClosingSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-10">
             {/* Brand */}
             <div>
-              <p className="font-serif text-xl text-foreground tracking-[0.02em] mb-3">RoyalX</p>
+              <p className="font-serif text-xl text-foreground tracking-[0.02em] mb-3">אוטומציה עסקית</p>
               <p className="text-xs text-muted-foreground/60 leading-relaxed">
-                Strategic commercial advisory platform enabling cross-border AI expansion into the UAE and GCC markets.
+                אנחנו בונים מערכות אוטומציה, אפליקציות ופתרונות דיגיטליים מותאמים אישית שחוסכים לכם זמן, כסף וכאב ראש.
               </p>
             </div>
 
             {/* Quick links */}
             <div>
-              <p className="text-label text-xs text-muted-foreground/40 mb-4">Navigation</p>
+              <p className="text-label text-xs text-muted-foreground/40 mb-4">ניווט</p>
               <ul className="space-y-2">
-                {["Opportunity", "Framework", "Portfolio", "Leadership"].map((item) => (
-                  <li key={item}>
+                {[
+                  { label: "שירותים", href: "#services" },
+                  { label: "תהליך עבודה", href: "#framework" },
+                  { label: "תחומי התמחות", href: "#portfolio" },
+                  { label: "הצוות", href: "#leadership" },
+                ].map((item) => (
+                  <li key={item.label}>
                     <a
-                      href={`#${item.toLowerCase()}`}
+                      href={item.href}
                       className="text-xs text-muted-foreground/60 hover:text-primary transition-colors duration-500"
                     >
-                      {item}
+                      {item.label}
                     </a>
                   </li>
                 ))}
                 <li>
-                  <Link to="/uae-brief" className="text-xs text-muted-foreground/60 hover:text-primary transition-colors duration-500">
-                    UAE Opportunity Brief
+                  <Link to="/business-brief" className="text-xs text-muted-foreground/60 hover:text-primary transition-colors duration-500">
+                    ניתוח עסקי מהיר
                   </Link>
                 </li>
               </ul>
@@ -124,21 +124,21 @@ const ClosingSection = () => {
 
             {/* Legal */}
             <div>
-              <p className="text-label text-xs text-muted-foreground/40 mb-4">Legal</p>
+              <p className="text-label text-xs text-muted-foreground/40 mb-4">משפטי</p>
               <ul className="space-y-2">
                 <li>
                   <button onClick={() => setShowTerms(true)} className="text-xs text-muted-foreground/60 hover:text-primary transition-colors duration-500 cursor-pointer">
-                    Terms of Use
+                    תנאי שימוש
                   </button>
                 </li>
                 <li>
                   <button onClick={() => setShowPrivacy(true)} className="text-xs text-muted-foreground/60 hover:text-primary transition-colors duration-500 cursor-pointer">
-                    Privacy Policy
+                    מדיניות פרטיות
                   </button>
                 </li>
                 <li>
-                  <a href="mailto:contact@royalx.ae" className="text-xs text-muted-foreground/60 hover:text-primary transition-colors duration-500">
-                    Contact Us
+                  <a href="mailto:tayaryardenn@gmail.com" className="text-xs text-muted-foreground/60 hover:text-primary transition-colors duration-500">
+                    צור קשר
                   </a>
                 </li>
               </ul>
@@ -148,10 +148,10 @@ const ClosingSection = () => {
           {/* Bottom bar */}
           <div className="pt-6 border-t border-border/20 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-[10px] text-muted-foreground/40 tracking-widest uppercase">
-              © {new Date().getFullYear()} RoyalX.ae — All rights reserved
+              © {new Date().getFullYear()} אוטומציה עסקית — כל הזכויות שמורות
             </p>
             <p className="text-[10px] text-muted-foreground/30">
-              This website does not constitute financial, legal, or investment advice.
+              אתר זה אינו מהווה ייעוץ פיננסי, משפטי או השקעתי.
             </p>
           </div>
         </div>
@@ -162,17 +162,17 @@ const ClosingSection = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center px-6" onClick={() => setShowTerms(false)}>
           <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
           <div className="relative bg-card border border-border/50 rounded-xl p-8 md:p-10 max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <h3 className="font-serif text-2xl text-foreground mb-6">Terms of Use</h3>
+            <h3 className="font-serif text-2xl text-foreground mb-6">תנאי שימוש</h3>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-              <p>Welcome to RoyalX.ae. By accessing or using this website, you agree to be bound by these Terms of Use.</p>
-              <p><strong className="text-foreground/80">1. Use of Website.</strong> This website is provided for informational purposes only. The content does not constitute an offer, solicitation, or recommendation for any investment, partnership, or business arrangement.</p>
-              <p><strong className="text-foreground/80">2. Intellectual Property.</strong> All content, trademarks, logos, and intellectual property displayed on this website are the property of RoyalX or its licensors. Unauthorized reproduction or distribution is prohibited.</p>
-              <p><strong className="text-foreground/80">3. No Advisory Relationship.</strong> Nothing on this website creates a client-advisor, fiduciary, or professional advisory relationship. Any engagement requires separate formal agreements.</p>
-              <p><strong className="text-foreground/80">4. Disclaimer.</strong> Information provided is indicative and may not be current or complete. RoyalX makes no warranties regarding the accuracy, completeness, or reliability of any content.</p>
-              <p><strong className="text-foreground/80">5. Limitation of Liability.</strong> RoyalX shall not be liable for any direct, indirect, or consequential damages arising from the use of this website.</p>
-              <p><strong className="text-foreground/80">6. Governing Law.</strong> These terms are governed by the laws of the United Arab Emirates.</p>
+              <p>ברוכים הבאים לאתר שלנו. השימוש באתר ובשירותים שלנו כפוף לתנאים הבאים. בשימוש באתר, אתם מסכימים לתנאים אלו.</p>
+              <p><strong className="text-foreground/80">1. השירותים.</strong> אנו מספקים שירותי פיתוח תוכנה, אוטומציה עסקית, אינטגרציות ופתרונות דיגיטליים מותאמים אישית. היקף השירות המדויק, לוחות הזמנים והתמחור ייקבעו בהסכם נפרד.</p>
+              <p><strong className="text-foreground/80">2. קניין רוחני.</strong> כל התכנים באתר, כולל עיצוב, טקסטים, לוגו וגרפיקה, הם רכושנו ומוגנים בזכויות יוצרים. קוד ומערכות שפותחו עבור לקוחות יהיו בבעלותם בכפוף לתנאי ההסכם.</p>
+              <p><strong className="text-foreground/80">3. הגבלת אחריות.</strong> השירותים ניתנים כפי שהם. איננו אחראים לנזקים עקיפים או תוצאתיים הנובעים משימוש בשירותים, מעבר למה שנקבע בהסכם השירות.</p>
+              <p><strong className="text-foreground/80">4. סודיות.</strong> אנו מתחייבים לשמור בסודיות מוחלטת על כל מידע עסקי או אישי שנחשף לנו במסגרת מתן השירות.</p>
+              <p><strong className="text-foreground/80">5. ביטולים.</strong> תנאי ביטול ייקבעו בהסכם השירות הספציפי. באופן כללי, ביטול פרויקט בתהליך עבודה יחייב תשלום עבור העבודה שבוצעה עד למועד הביטול.</p>
+              <p><strong className="text-foreground/80">6. דין ושיפוט.</strong> תנאים אלו כפופים לחוקי מדינת ישראל. סמכות השיפוט הבלעדית תהיה לבתי המשפט המוסמכים במחוז המרכז.</p>
             </div>
-            <button onClick={() => setShowTerms(false)} className="mt-6 text-label text-xs text-muted-foreground/50 hover:text-primary tracking-[0.2em] transition-colors cursor-pointer">Close</button>
+            <button onClick={() => setShowTerms(false)} className="mt-6 text-label text-xs text-muted-foreground/50 hover:text-primary tracking-[0.2em] transition-colors cursor-pointer">סגור</button>
           </div>
         </div>
       )}
@@ -182,18 +182,18 @@ const ClosingSection = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center px-6" onClick={() => setShowPrivacy(false)}>
           <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
           <div className="relative bg-card border border-border/50 rounded-xl p-8 md:p-10 max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <h3 className="font-serif text-2xl text-foreground mb-6">Privacy Policy</h3>
+            <h3 className="font-serif text-2xl text-foreground mb-6">מדיניות פרטיות</h3>
             <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
-              <p>RoyalX.ae is committed to protecting your privacy. This policy explains how we handle information collected through this website.</p>
-              <p><strong className="text-foreground/80">1. Information Collected.</strong> We may collect basic usage data (page views, browser type) through standard analytics. The UAE Opportunity Brief tool collects only the business information you voluntarily provide.</p>
-              <p><strong className="text-foreground/80">2. Use of Information.</strong> Any information collected is used solely to improve our services and respond to inquiries. We do not sell or share personal information with third parties for marketing purposes.</p>
-              <p><strong className="text-foreground/80">3. Data Security.</strong> We implement industry-standard security measures to protect any information submitted through this website.</p>
-              <p><strong className="text-foreground/80">4. Cookies.</strong> This website may use essential cookies to ensure proper functionality. No tracking or advertising cookies are used.</p>
-              <p><strong className="text-foreground/80">5. Third-Party Services.</strong> This website may contain links to external sites. We are not responsible for the privacy practices of third-party websites.</p>
-              <p><strong className="text-foreground/80">6. Contact.</strong> For privacy-related inquiries, please contact us at contact@royalx.ae.</p>
-              <p><strong className="text-foreground/80">7. Updates.</strong> This policy may be updated from time to time. Continued use of the website constitutes acceptance of any changes.</p>
+              <p>אנו מכבדים את פרטיותכם ומחויבים להגן על המידע האישי שלכם. מדיניות זו מסבירה כיצד אנו אוספים, משתמשים ומגינים על המידע שלכם.</p>
+              <p><strong className="text-foreground/80">1. מידע שאנו אוספים.</strong> אנו עשויים לאסוף מידע אישי שאתם מספקים ישירות דרך טופס יצירת קשר: שם, אימייל, טלפון ופרטי הפנייה. כמו כן מידע טכני שנאסף אוטומטית.</p>
+              <p><strong className="text-foreground/80">2. שימוש במידע.</strong> המידע משמש לספק ולשפר את שירותינו, ליצור עמכם קשר בתגובה לפנייתכם, ולעמוד בדרישות חוקיות.</p>
+              <p><strong className="text-foreground/80">3. אבטחת מידע.</strong> אנו נוקטים באמצעי אבטחה סבירים כדי להגן על המידע שלכם מפני גישה בלתי מורשית.</p>
+              <p><strong className="text-foreground/80">4. עוגיות.</strong> האתר עשוי להשתמש בעוגיות לצורך שיפור חוויית הגלישה. תוכלו לשלוט בהגדרות העוגיות דרך הדפדפן שלכם.</p>
+              <p><strong className="text-foreground/80">5. שיתוף מידע.</strong> איננו מוכרים את המידע האישי שלכם. אנו עשויים לשתף מידע עם ספקי שירות הפועלים מטעמנו ומחויבים לשמור על סודיות.</p>
+              <p><strong className="text-foreground/80">6. זכויותיכם.</strong> הינכם זכאים לעיין במידע שנשמר אודותיכם, לבקש תיקון או מחיקת מידע, ולהתנגד לשימוש במידע לצורכי שיווק.</p>
+              <p><strong className="text-foreground/80">7. יצירת קשר.</strong> לשאלות בנוגע למדיניות פרטיות זו, פנו אלינו: tayaryardenn@gmail.com</p>
             </div>
-            <button onClick={() => setShowPrivacy(false)} className="mt-6 text-label text-xs text-muted-foreground/50 hover:text-primary tracking-[0.2em] transition-colors cursor-pointer">Close</button>
+            <button onClick={() => setShowPrivacy(false)} className="mt-6 text-label text-xs text-muted-foreground/50 hover:text-primary tracking-[0.2em] transition-colors cursor-pointer">סגור</button>
           </div>
         </div>
       )}

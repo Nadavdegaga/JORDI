@@ -3,10 +3,10 @@ import AnimatedSection from "./AnimatedSection";
 import GoldDivider from "./GoldDivider";
 
 const statements = [
-  "An institutional filtering mechanism for global innovation",
-  "Selecting only the top 1% of technologies worldwide",
-  "Built for enterprise and institutional deployment",
-  "Designed for long-term commercial value, not experimentation",
+  "פתרונות דיגיטליים מותאמים אישית לכל עסק",
+  "אוטומציה שחוסכת לכם שעות עבודה בכל יום",
+  "חיבור כל המערכות שלכם למכונה אחת חלקה",
+  "ליווי מלא — מהרעיון ועד המוצר המוגמר",
 ];
 
 const SpotlightRow = ({ statement, index }: { statement: string; index: number }) => {
@@ -56,13 +56,13 @@ const WhatIsSection = () => {
       <div className="max-w-4xl mx-auto">
         <AnimatedSection>
           <p className="text-label text-primary mb-4 text-center">
-            What RoyalX Is
+            למה אנחנו
           </p>
         </AnimatedSection>
 
         <AnimatedSection delay={0.15}>
           <h2 className="heading-section text-center text-foreground mb-6">
-            Institutional-Grade <span className="text-gradient-gold">Precision</span>
+            דיוק <span className="text-gradient-gold">מקצועי</span>
           </h2>
         </AnimatedSection>
 
