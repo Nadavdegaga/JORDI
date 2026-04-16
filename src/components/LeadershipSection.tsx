@@ -6,6 +6,7 @@ import ceoPhoto from "@/assets/ceo-photo.jpg";
 import csoPhoto from "@/assets/cso-photo.jpg";
 import advisoryPhoto from "@/assets/advisory-photo.jpg";
 import cgoPhoto from "@/assets/cgo-photo.jpg";
+import yardenPhoto from "@/assets/yarden-photo.jpg";
 
 const leaders: Person[] = [];
 
