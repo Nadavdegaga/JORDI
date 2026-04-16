@@ -199,6 +199,8 @@ const ClosingSection = () => {
           </div>
         </div>
       )}
+
+      <ContactDialog open={showContact} onOpenChange={setShowContact} />
     </section>
   );
 };
