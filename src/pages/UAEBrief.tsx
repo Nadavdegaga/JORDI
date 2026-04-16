@@ -4,26 +4,26 @@ import { supabase } from "@/integrations/supabase/client";
 import GrainOverlay from "@/components/GrainOverlay";
 import {
   Landmark, Brain, Shield, HeartPulse, Truck, Building2, Zap, ShoppingBag,
-  ArrowLeft, Loader2, AlertTriangle, TrendingUp, Target, MapPin, ChevronRight
+  ArrowRight, Loader2, AlertTriangle, TrendingUp, Target, MapPin, ChevronLeft
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 const verticals = [
-  { id: "fintech", label: "FinTech", icon: Landmark },
-  { id: "ai-data", label: "AI / Data", icon: Brain },
-  { id: "cybersecurity", label: "Cybersecurity", icon: Shield },
-  { id: "healthtech", label: "HealthTech", icon: HeartPulse },
-  { id: "mobility-logistics", label: "Mobility / Logistics", icon: Truck },
-  { id: "proptech", label: "PropTech", icon: Building2 },
-  { id: "energy-climate", label: "Energy / Climate", icon: Zap },
-  { id: "consumer-retail", label: "Consumer / Retail", icon: ShoppingBag },
+  { id: "automation", label: "אוטומציה עסקית", icon: Zap },
+  { id: "apps", label: "אפליקציות", icon: Brain },
+  { id: "integrations", label: "אינטגרציות", icon: Shield },
+  { id: "ai", label: "פתרונות AI", icon: HeartPulse },
+  { id: "dashboards", label: "דשבורדים", icon: Landmark },
+  { id: "digital", label: "פתרונות דיגיטליים", icon: Building2 },
+  { id: "ecommerce", label: "מסחר אלקטרוני", icon: ShoppingBag },
+  { id: "logistics", label: "לוגיסטיקה", icon: Truck },
 ];
 
-const stages = ["Pre-seed", "Seed", "Series A", "Growth"];
-const markets = ["US", "EU", "APAC", "MENA", "Other"];
-const models = ["B2B", "B2C", "B2G"];
-const revenues = ["Pre-revenue", "$0–$500K", "$500K–$2M", "$2M–$10M", "$10M+"];
+const stages = ["רעיון ראשוני", "מוצר ראשוני", "עסק פעיל", "צמיחה"];
+const markets = ["ישראל", "אירופה", "ארה״ב", "אחר"];
+const models = ["B2B", "B2C", "שניהם"];
+const revenues = ["טרם הכנסות", "₪0–₪50K", "₪50K–₪200K", "₪200K–₪1M", "₪1M+"];
 
 interface BriefData {
   fitSummary: { level: string; reasoning: string };
@@ -52,11 +52,11 @@ const UAEBrief = () => {
 
   const handleSubmit = async () => {
     if (!form.companyName || !form.stage || !form.primaryMarket || !form.businessModel || !form.description) {
-      toast({ title: "Please fill in all required fields.", variant: "destructive" });
+      toast({ title: "נא למלא את כל השדות הנדרשים.", variant: "destructive" });
       return;
     }
     if (form.description.length > 500) {
-      toast({ title: "Description too long. Keep it to 2-3 sentences.", variant: "destructive" });
+      toast({ title: "התיאור ארוך מדי. שמרו על 2-3 משפטים.", variant: "destructive" });
       return;
     }
 
@@ -74,7 +74,7 @@ const UAEBrief = () => {
       setStep("results");
     } catch (e: any) {
       console.error(e);
-      toast({ title: "Failed to generate brief. Please try again.", variant: "destructive" });
+      toast({ title: "שגיאה ביצירת הניתוח. נסו שוב.", variant: "destructive" });
       setStep("form");
     }
   };
@@ -90,10 +90,10 @@ const UAEBrief = () => {
       <GrainOverlay />
 
       {/* Back link */}
-      <div className="fixed top-6 left-6 z-40">
+      <div className="fixed top-6 right-6 z-40">
         <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-500 text-sm tracking-[0.15em] uppercase">
-          <ArrowLeft className="w-4 h-4" />
-          RoyalX
+          אוטומציה עסקית
+          <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
 
@@ -106,7 +106,7 @@ const UAEBrief = () => {
             transition={{ duration: 1 }}
             className="text-label text-primary mb-6 tracking-[0.3em]"
           >
-            UAE Opportunity Brief
+            ניתוח עסקי מהיר
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -114,7 +114,7 @@ const UAEBrief = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="heading-display text-foreground mb-6"
           >
-            Generate a confidential UAE market snapshot in <span className="text-gradient-gold">60 seconds.</span>
+            קבלו ניתוח שוק מותאם אישית תוך <span className="text-gradient-gold">60 שניות.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -122,7 +122,7 @@ const UAEBrief = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-body text-muted-foreground max-w-xl mx-auto mb-4"
           >
-            A high-level, indicative brief covering market size, growth drivers, and a suggested go-to-market path.
+            ניתוח ברמה גבוהה הכולל גודל שוק, מנועי צמיחה ומסלול כניסה מומלץ.
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -130,7 +130,7 @@ const UAEBrief = () => {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="text-xs text-muted-foreground/50 tracking-widest uppercase"
           >
-            No sensitive data required. Outputs are estimates.
+            ללא צורך במידע רגיש. התוצאות הן הערכות.
           </motion.p>
         </div>
       </section>
@@ -146,7 +146,7 @@ const UAEBrief = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
             >
-              <p className="text-label text-primary/60 text-center mb-8 tracking-[0.2em]">Select your vertical</p>
+              <p className="text-label text-primary/60 text-center mb-8 tracking-[0.2em]">בחרו את התחום שלכם</p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {verticals.map((v) => {
                   const Icon = v.icon;
@@ -194,7 +194,7 @@ const UAEBrief = () => {
                   onClick={() => setStep("vertical")}
                   className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer"
                 >
-                  ← Change vertical
+                  ← שנו תחום
                 </button>
                 <span className="text-label text-primary/60 text-xs">
                   {verticals.find((v) => v.id === selectedVertical)?.label}
@@ -202,26 +202,26 @@ const UAEBrief = () => {
               </div>
 
               <div className="space-y-6">
-                <InputField label="Company Name *" value={form.companyName} onChange={(v) => setForm({ ...form, companyName: v })} />
-                <InputField label="Website" value={form.website} onChange={(v) => setForm({ ...form, website: v })} placeholder="https://" />
+                <InputField label="שם העסק *" value={form.companyName} onChange={(v) => setForm({ ...form, companyName: v })} />
+                <InputField label="אתר אינטרנט" value={form.website} onChange={(v) => setForm({ ...form, website: v })} placeholder="https://" />
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <SelectField label="Stage *" value={form.stage} options={stages} onChange={(v) => setForm({ ...form, stage: v })} />
-                  <SelectField label="Primary Market *" value={form.primaryMarket} options={markets} onChange={(v) => setForm({ ...form, primaryMarket: v })} />
-                  <SelectField label="Business Model *" value={form.businessModel} options={models} onChange={(v) => setForm({ ...form, businessModel: v })} />
+                  <SelectField label="שלב *" value={form.stage} options={stages} onChange={(v) => setForm({ ...form, stage: v })} />
+                  <SelectField label="שוק עיקרי *" value={form.primaryMarket} options={markets} onChange={(v) => setForm({ ...form, primaryMarket: v })} />
+                  <SelectField label="מודל עסקי *" value={form.businessModel} options={models} onChange={(v) => setForm({ ...form, businessModel: v })} />
                 </div>
 
-                <SelectField label="Revenue Range" value={form.revenueRange} options={revenues} onChange={(v) => setForm({ ...form, revenueRange: v })} />
+                <SelectField label="טווח הכנסות" value={form.revenueRange} options={revenues} onChange={(v) => setForm({ ...form, revenueRange: v })} />
 
                 <div>
-                  <label className="text-label text-xs text-muted-foreground mb-2 block">Short Description * (2–3 sentences)</label>
+                  <label className="text-label text-xs text-muted-foreground mb-2 block">תיאור קצר * (2–3 משפטים)</label>
                   <textarea
                     value={form.description}
                     onChange={(e) => setForm({ ...form, description: e.target.value })}
                     maxLength={500}
                     rows={3}
                     className="w-full bg-card/30 border border-border/40 rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-primary/40 transition-colors duration-500 resize-none"
-                    placeholder="Briefly describe what your company does..."
+                    placeholder="ספרו בקצרה מה העסק שלכם עושה..."
                   />
                 </div>
 
@@ -229,7 +229,7 @@ const UAEBrief = () => {
                   onClick={handleSubmit}
                   className="w-full text-label tracking-[0.2em] text-primary-foreground bg-primary/90 hover:bg-primary px-8 py-4 rounded-lg transition-all duration-500 cta-glow cursor-pointer"
                 >
-                  Generate UAE Brief
+                  צרו ניתוח עסקי
                 </button>
               </div>
             </motion.div>
@@ -245,8 +245,8 @@ const UAEBrief = () => {
               className="flex flex-col items-center justify-center py-32"
             >
               <Loader2 className="w-8 h-8 text-primary animate-spin mb-6" />
-              <p className="text-label text-primary/70 tracking-[0.3em]">Generating confidential brief…</p>
-              <p className="text-xs text-muted-foreground/40 mt-3">This may take up to 30 seconds</p>
+              <p className="text-label text-primary/70 tracking-[0.3em]">מייצרים ניתוח מותאם…</p>
+              <p className="text-xs text-muted-foreground/40 mt-3">זה עשוי לקחת עד 30 שניות</p>
             </motion.div>
           )}
 
@@ -260,26 +260,24 @@ const UAEBrief = () => {
               className="max-w-3xl mx-auto"
             >
               <div className="text-center mb-12">
-                <p className="text-label text-primary/60 tracking-[0.3em] mb-2">Confidential Brief</p>
+                <p className="text-label text-primary/60 tracking-[0.3em] mb-2">ניתוח מותאם</p>
                 <h2 className="font-serif text-2xl md:text-3xl font-light text-foreground tracking-[0.02em]">
-                  {form.companyName} — UAE Market Assessment
+                  {form.companyName} — הערכת שוק
                 </h2>
                 <div className="w-16 h-px bg-gradient-gold mx-auto mt-6" />
               </div>
 
-              {/* A) Fit Summary */}
-              <BriefSection title="Strategic Fit Assessment" icon={Target} delay={0.1}>
+              <BriefSection title="הערכת התאמה אסטרטגית" icon={Target} delay={0.1}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className={`font-serif text-3xl font-light ${fitColor(brief.fitSummary.level)}`}>
                     {brief.fitSummary.level}
                   </span>
-                  <span className="text-xs text-muted-foreground/60 uppercase tracking-widest">Fit Score</span>
+                  <span className="text-xs text-muted-foreground/60 uppercase tracking-widest">ציון התאמה</span>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">{brief.fitSummary.reasoning}</p>
               </BriefSection>
 
-              {/* B) Market Size */}
-              <BriefSection title="Market Size Estimates" icon={TrendingUp} delay={0.2}>
+              <BriefSection title="הערכת גודל שוק" icon={TrendingUp} delay={0.2}>
                 <div className="grid grid-cols-3 gap-4 mb-4">
                   {[
                     { label: "TAM", value: brief.marketSize.tam },
@@ -295,20 +293,18 @@ const UAEBrief = () => {
                 <p className="text-xs text-muted-foreground/60 italic">{brief.marketSize.assumptions}</p>
               </BriefSection>
 
-              {/* C) Growth Drivers */}
-              <BriefSection title="UAE Growth Drivers" icon={Zap} delay={0.3}>
+              <BriefSection title="מנועי צמיחה" icon={Zap} delay={0.3}>
                 <ul className="space-y-3">
                   {brief.growthDrivers.map((d, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <ChevronRight className="w-3 h-3 text-primary/50 mt-1.5 shrink-0" />
+                      <ChevronLeft className="w-3 h-3 text-primary/50 mt-1.5 shrink-0" />
                       <span className="text-sm text-muted-foreground leading-relaxed">{d}</span>
                     </li>
                   ))}
                 </ul>
               </BriefSection>
 
-              {/* D) Go-to-Market */}
-              <BriefSection title="Recommended Go-to-Market" icon={MapPin} delay={0.4}>
+              <BriefSection title="מסלול כניסה מומלץ" icon={MapPin} delay={0.4}>
                 <div className="space-y-6">
                   {brief.goToMarket.map((g, i) => (
                     <div key={i} className="flex items-start gap-4">
@@ -324,8 +320,7 @@ const UAEBrief = () => {
                 </div>
               </BriefSection>
 
-              {/* E) Risks */}
-              <BriefSection title="Risks & Constraints" icon={AlertTriangle} delay={0.5}>
+              <BriefSection title="סיכונים ומגבלות" icon={AlertTriangle} delay={0.5}>
                 <ul className="space-y-3">
                   {brief.risks.map((r, i) => (
                     <li key={i} className="flex items-start gap-3">
@@ -336,7 +331,6 @@ const UAEBrief = () => {
                 </ul>
               </BriefSection>
 
-              {/* CTA */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -347,13 +341,12 @@ const UAEBrief = () => {
                   onClick={() => setShowContact(true)}
                   className="text-label tracking-[0.2em] text-primary/70 hover:text-primary border border-primary/20 hover:border-primary/40 px-8 py-4 rounded transition-all duration-700 cta-glow cursor-pointer"
                 >
-                  Request a Private Introduction
+                  בואו נדבר
                 </button>
               </motion.div>
 
-              {/* Disclaimer */}
               <p className="text-[10px] text-muted-foreground/30 text-center mt-16 tracking-widest uppercase leading-relaxed max-w-lg mx-auto">
-                This brief is indicative and does not constitute financial, legal, or investment advice.
+                ניתוח זה הוא אינדיקטיבי בלבד ואינו מהווה ייעוץ פיננסי, משפטי או השקעתי.
               </p>
             </motion.div>
           )}
@@ -376,21 +369,21 @@ const UAEBrief = () => {
               exit={{ opacity: 0, scale: 0.95 }}
               className="relative bg-card border border-border/50 rounded-lg p-10 max-w-md w-full"
             >
-              <p className="text-label text-primary mb-4 tracking-[0.2em]">Private Introduction</p>
+              <p className="text-label text-primary mb-4 tracking-[0.2em]">בואו נדבר</p>
               <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
-                For a confidential discussion about your UAE market entry strategy, reach out to our team directly.
+                לשיחה על איך נוכל לעזור לעסק שלכם, שלחו לנו הודעה ונחזור אליכם בהקדם.
               </p>
               <a
-                href="mailto:contact@royalx.ae"
+                href="mailto:tayaryardenn@gmail.com"
                 className="block w-full text-center text-label tracking-[0.2em] text-primary-foreground bg-primary/90 hover:bg-primary px-8 py-4 rounded-lg transition-all duration-500 cta-glow"
               >
-                Contact RoyalX
+                שלחו אימייל
               </a>
               <button
                 onClick={() => setShowContact(false)}
                 className="mt-4 w-full text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-pointer"
               >
-                Close
+                סגור
               </button>
             </motion.div>
           </motion.div>
@@ -423,7 +416,7 @@ const SelectField = ({ label, value, options, onChange }: { label: string; value
       onChange={(e) => onChange(e.target.value)}
       className="w-full bg-card/30 border border-border/40 rounded-lg px-4 py-3 text-sm text-foreground focus:outline-none focus:border-primary/40 transition-colors duration-500 appearance-none cursor-pointer"
     >
-      <option value="">Select...</option>
+      <option value="">בחרו...</option>
       {options.map((o) => (
         <option key={o} value={o}>{o}</option>
       ))}
