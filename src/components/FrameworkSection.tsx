@@ -3,7 +3,7 @@ import { useRef } from "react";
 import AnimatedSection from "./AnimatedSection";
 import GoldDivider from "./GoldDivider";
 import { Phone, PenTool, Code, Rocket } from "lucide-react";
-import mosqueDome from "@/assets/heart-math.jpg";
+import mosqueDome from "@/assets/neon-cube.jpg";
 
 const steps = [
   {
