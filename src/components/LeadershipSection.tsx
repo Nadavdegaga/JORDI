@@ -6,11 +6,12 @@ import ceoPhoto from "@/assets/ceo-photo.jpg";
 import csoPhoto from "@/assets/cso-photo.jpg";
 import advisoryPhoto from "@/assets/advisory-photo.jpg";
 import cgoPhoto from "@/assets/cgo-photo.jpg";
+import yardenPhoto from "@/assets/yarden-photo.jpg";
 
 const leaders: Person[] = [];
 
 const executives = [
-  { role: "שותף מייסד", title: "מחקר ופיתוח", name: "ירדן טייר", image: null, bio: null },
+  { role: "שותף מייסד", title: "מחקר ופיתוח", name: "ירדן טייר", image: yardenPhoto, imagePos: "center 30%", bio: "מהנדסת תעשייה וניהול עם התמחות בפיתוח מוצר וניהול פרויקטים טכנולוגיים. מובילה את מחלקת המחקר והפיתוח עם ניסיון בבינה עסקית, ניתוח נתונים ופתרונות דיגיטליים מתקדמים." },
   { role: "שותף מייסד", title: "אסטרטגיה ותפעול", name: "נדב דגגה", image: csoPhoto, imagePos: "center 20%", bio: "בוגר מתמטיקה וכלכלה מאוניברסיטת תל אביב. יזם מנוסה בהרחבת עסקים בינלאומיים מקונספט ועד למובילות שוק. מומחה באסטרטגיות צמיחה ומכירות." },
 ];
 
@@ -84,7 +85,7 @@ const LeadershipSection = () => {
         </div>
 
         {/* Executive row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto">
           {executives.map((exec, index) => (
             <AnimatedSection key={index} delay={0.4 + index * 0.1}>
               <div
