@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import heroImage from "@/assets/dubai-skyline-dusk.jpg";
+import heroImage from "@/assets/hero-lightbulb.jpg";
 import TextReveal from "./TextReveal";
 
 const HeroSection = () => {
