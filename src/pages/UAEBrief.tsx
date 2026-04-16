@@ -28,9 +28,10 @@ const revenues = ["טרם הכנסות", "₪0–₪50K", "₪50K–₪200K", "�
 
 interface BriefData {
   fitSummary: { level: string; reasoning: string };
-  marketSize: { tam: string; sam: string; som: string; assumptions: string };
-  growthDrivers: string[];
-  goToMarket: { step: string; detail: string }[];
+  automations: { process: string; description: string; savingsEstimate: string; complexity: string }[];
+  totalSavings: { monthlyCostSaving: string; monthlyTimeSaving: string; revenueGrowthPotential: string; assumptions: string };
+  quickWins: string[];
+  roadmap: { step: string; detail: string; timeline: string }[];
   risks: string[];
 }
 
