@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import AnimatedSection from "./AnimatedSection";
 import GoldDivider from "./GoldDivider";
 import { Zap, Smartphone, Link2, Bot, BarChart3, Globe } from "lucide-react";
-import dubaiSkyline from "@/assets/hero-emirates-fog.jpg";
+import dubaiSkyline from "@/assets/chess-strategy.jpg";
 
 const sectors = [
   { icon: Zap, label: "אוטומציות עסקיות", insight: "חיבור מערכות, אוטומציית תהליכים, העברת מידע אוטומטית בין פלטפורמות — כל מה שחוסך עבודה ידנית חוזרת ומייעל את העסק שלכם." },

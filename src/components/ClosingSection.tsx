@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import TextReveal from "./TextReveal";
-import heroGlobe from "@/assets/hero-globe.jpg";
+import heroGlobe from "@/assets/geo-sphere.jpg";
 
 const ClosingSection = () => {
   const lineRef = useRef(null);
