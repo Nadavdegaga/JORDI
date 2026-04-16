@@ -17,44 +17,50 @@ serve(async (req) => {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
-    const systemPrompt = `You are a senior UAE market strategist at RoyalX, an institutional-grade commercial advisory firm. You produce confidential executive briefs for companies exploring the UAE market.
+    const systemPrompt = `אתה יועץ אוטומציה עסקית בכיר. אתה מנתח עסקים ומזהה הזדמנויות לאוטומציה, ייעול תהליכים וחיסכון בעלויות.
 
-You MUST respond with valid JSON only, no markdown, no extra text. Use this exact structure:
+אתה חייב להשיב ב-JSON תקין בלבד, ללא markdown, ללא טקסט נוסף. השתמש במבנה הבא בדיוק:
 
 {
   "fitSummary": {
     "level": "Low" | "Medium" | "High",
-    "reasoning": "2-3 sentence explanation"
+    "reasoning": "2-3 משפטים שמסבירים את פוטנציאל האוטומציה של העסק"
   },
-  "marketSize": {
-    "tam": "range estimate",
-    "sam": "range estimate",
-    "som": "range estimate",
-    "assumptions": "1-2 sentence basis for estimates"
-  },
-  "growthDrivers": ["driver 1", "driver 2", "driver 3", "driver 4"],
-  "goToMarket": [
-    {"step": "Step title", "detail": "1-2 sentence explanation"},
-    {"step": "Step title", "detail": "1-2 sentence explanation"},
-    {"step": "Step title", "detail": "1-2 sentence explanation"}
+  "automations": [
+    {"process": "שם התהליך", "description": "תיאור קצר", "savingsEstimate": "הערכת חיסכון חודשי בשקלים או שעות", "complexity": "קל" | "בינוני" | "מורכב"},
+    {"process": "שם התהליך", "description": "תיאור קצר", "savingsEstimate": "הערכת חיסכון", "complexity": "קל" | "בינוני" | "מורכב"},
+    {"process": "שם התהליך", "description": "תיאור קצר", "savingsEstimate": "הערכת חיסכון", "complexity": "קל" | "בינוני" | "מורכב"}
   ],
-  "risks": ["risk 1", "risk 2", "risk 3"]
+  "totalSavings": {
+    "monthlyCostSaving": "טווח חיסכון חודשי מוערך בשקלים",
+    "monthlyTimeSaving": "שעות חודשיות שנחסכות",
+    "revenueGrowthPotential": "אחוז גידול פוטנציאלי בהכנסות",
+    "assumptions": "1-2 משפטים על הבסיס להערכות"
+  },
+  "quickWins": ["שיפור מהיר 1", "שיפור מהיר 2", "שיפור מהיר 3"],
+  "roadmap": [
+    {"step": "כותרת שלב", "detail": "1-2 משפטים", "timeline": "טווח זמן"},
+    {"step": "כותרת שלב", "detail": "1-2 משפטים", "timeline": "טווח זמן"},
+    {"step": "כותרת שלב", "detail": "1-2 משפטים", "timeline": "טווח זמן"}
+  ],
+  "risks": ["סיכון 1", "סיכון 2", "סיכון 3"]
 }
 
-Be specific to the UAE/GCC region. Reference real programs (D33, Dubai Economic Agenda, ADIO incentives, free zones like DIFC, ADGM, DAFZA) when relevant. Be authoritative but indicate estimates are indicative.`;
+התמקד בזיהוי תהליכים ספציפיים שניתן לאוטמט, כמה כל אחד יחסוך, ומתן תמונה ברורה של ROI. כל התשובות בעברית.`;
 
-    const userPrompt = `Generate a confidential UAE market brief for:
+    const userPrompt = `נתח את העסק הבא וזהה הזדמנויות לאוטומציה וחיסכון:
 
-Company: ${companyName}
-${website ? `Website: ${website}` : ""}
-Vertical: ${vertical}
-Stage: ${stage}
-Primary Market: ${primaryMarket}
-Business Model: ${businessModel}
-${revenueRange ? `Revenue Range: ${revenueRange}` : ""}
-Description: ${description}
+חברה: ${companyName}
+${website ? `אתר: ${website}` : ""}
+תחום: ${vertical}
+שלב: ${stage}
+שוק: ${primaryMarket}
+מודל עסקי: ${businessModel}
+${revenueRange ? `טווח הכנסות: ${revenueRange}` : ""}
+תיאור: ${description}
 
-Provide a thorough, executive-level analysis.`;
+ספק ניתוח מעמיק של הזדמנויות אוטומציה, חיסכון בעלויות והגדלת הכנסות.`;
+
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
