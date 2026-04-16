@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import UAEBrief from "./pages/UAEBrief";
 import NotFound from "./pages/NotFound";
+import FloatingContact from "./components/FloatingContact";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <FloatingContact />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/business-brief" element={<UAEBrief />} />
