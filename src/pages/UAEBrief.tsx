@@ -354,42 +354,7 @@ const UAEBrief = () => {
         </AnimatePresence>
       </div>
 
-      {/* Contact Modal */}
-      <AnimatePresence>
-        {showContact && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center px-6"
-          >
-            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setShowContact(false)} />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="relative bg-card border border-border/50 rounded-lg p-10 max-w-md w-full"
-            >
-              <p className="text-label text-primary mb-4 tracking-[0.2em]">בואו נדבר</p>
-              <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
-                לשיחה על איך נוכל לעזור לעסק שלכם, שלחו לנו הודעה ונחזור אליכם בהקדם.
-              </p>
-              <a
-                href="mailto:tayaryardenn@gmail.com"
-                className="block w-full text-center text-label tracking-[0.2em] text-primary-foreground bg-primary/90 hover:bg-primary px-8 py-4 rounded-lg transition-all duration-500 cta-glow"
-              >
-                שלחו אימייל
-              </a>
-              <button
-                onClick={() => setShowContact(false)}
-                className="mt-4 w-full text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors cursor-pointer"
-              >
-                סגור
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <ContactDialog open={showContact} onOpenChange={setShowContact} />
     </main>
   );
 };
