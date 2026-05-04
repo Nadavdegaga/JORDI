@@ -70,11 +70,16 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Heebo', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Heebo', sans-serif;
+  }
+
+  /* Force Heebo across the entire app, including utility classes like font-serif */
+  .font-serif, .font-sans, button, input, textarea, select {
+    font-family: 'Heebo', sans-serif !important;
   }
 
   /* Custom scrollbar */
@@ -164,12 +169,12 @@
   }
 
   .text-body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Heebo', sans-serif;
     @apply text-base md:text-lg font-light leading-relaxed;
   }
 
   .text-label {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Heebo', sans-serif;
     @apply text-xs md:text-sm font-medium tracking-[0.2em] uppercase;
   }
 }
