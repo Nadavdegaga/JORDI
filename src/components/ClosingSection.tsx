@@ -91,7 +91,7 @@ const ClosingSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-10">
             {/* Brand */}
             <div>
-              <p className="font-serif text-xl text-foreground tracking-[0.02em] mb-3">אוטומציה עסקית</p>
+              <p className="font-serif text-xl text-foreground tracking-[0.02em] mb-3">PitStop Automation</p>
               <p className="text-xs text-muted-foreground/60 leading-relaxed">
                 אנחנו בונים מערכות אוטומציה, אפליקציות ופתרונות דיגיטליים מותאמים אישית שחוסכים לכם זמן, כסף וכאב ראש.
               </p>
@@ -150,7 +150,7 @@ const ClosingSection = () => {
           {/* Bottom bar */}
           <div className="pt-6 border-t border-border/20 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-[10px] text-muted-foreground/40 tracking-widest uppercase">
-              © {new Date().getFullYear()} אוטומציה עסקית — כל הזכויות שמורות
+              © {new Date().getFullYear()} PitStop Automation — כל הזכויות שמורות
             </p>
             <p className="text-[10px] text-muted-foreground/30">
               אתר זה אינו מהווה ייעוץ פיננסי, משפטי או השקעתי.
