@@ -41,7 +41,7 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.3 }}
           className="text-label text-primary mb-8 tracking-[0.3em]"
         >
-          אוטומציה עסקית
+          PitStop Automation
         </motion.p>
 
         <h1 className="heading-display text-foreground mb-6 tracking-[0.02em]">
