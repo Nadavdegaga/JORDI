@@ -39,12 +39,12 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="text-label text-primary mb-8 tracking-[0.3em]"
+          className="text-label text-primary mb-8 tracking-[0.3em] normal-case"
         >
           PitStop Automation
         </motion.p>
 
-        <h1 className="heading-display text-foreground mb-6 tracking-[0.02em]">
+        <h1 className="heading-display font-bold text-foreground mb-6 tracking-[0.02em]">
           <TextReveal delay={0.6}>הפכו את העסק שלכם</TextReveal>
           <br />
           <TextReveal delay={0.8}>ל</TextReveal>

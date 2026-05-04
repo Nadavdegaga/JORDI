@@ -93,7 +93,7 @@ const UAEBrief = () => {
 
       {/* Back link */}
       <div className="fixed top-6 right-6 z-40">
-        <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-500 text-sm tracking-[0.15em] uppercase">
+        <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-500 text-sm tracking-[0.15em]">
           PitStop Automation
           <ArrowRight className="w-4 h-4" />
         </Link>
