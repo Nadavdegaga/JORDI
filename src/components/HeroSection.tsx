@@ -39,7 +39,7 @@ const HeroSection = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="text-label text-primary mb-8 tracking-[0.3em] normal-case"
+          className="text-label text-primary mb-8 tracking-[0.3em] !normal-case"
         >
           PitStop Automations
         </motion.p>
