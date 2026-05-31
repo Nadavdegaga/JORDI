@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { Trash2, Download, Plus, RefreshCw } from "lucide-react";
+import { Trash2, Download, RefreshCw } from "lucide-react";
 
 type FeedbackItem = {
   id: string;
@@ -21,7 +21,16 @@ type FeedbackItem = {
   created_at: string;
 };
 
-type Manager = { id: string; name: string };
+const PROJECT_TYPES = [
+  "דף נחיתה",
+  "אתר תדמית",
+  "חנות",
+  "מערכת סגורה",
+  "מערכת ניהול",
+  "אוטומציות",
+  "תשתית אינטגרטיבית",
+  "אחר",
+];
 
 const CATEGORY_LABEL: Record<string, string> = {
   design: "🎨 עיצוב",
@@ -55,13 +64,11 @@ const STATUSES = [
 
 const AdminFeedback = () => {
   const [items, setItems] = useState<FeedbackItem[]>([]);
-  const [managers, setManagers] = useState<Manager[]>([]);
-  const [newManager, setNewManager] = useState("");
   const [loading, setLoading] = useState(true);
 
   // Filters
   const [fProject, setFProject] = useState<string>("all");
-  const [fManager, setFManager] = useState<string>("all");
+  const [fType, setFType] = useState<string>("all");
   const [fStatus, setFStatus] = useState<string>("all");
   const [fCategory, setFCategory] = useState<string>("all");
   const [fPriority, setFPriority] = useState<string>("all");
@@ -69,12 +76,11 @@ const AdminFeedback = () => {
 
   const load = async () => {
     setLoading(true);
-    const [a, b] = await Promise.all([
-      supabase.from("feedback_items").select("*").order("created_at", { ascending: false }),
-      supabase.from("project_managers").select("*").order("name"),
-    ]);
-    setItems((a.data as FeedbackItem[]) || []);
-    setManagers((b.data as Manager[]) || []);
+    const { data } = await supabase
+      .from("feedback_items")
+      .select("*")
+      .order("created_at", { ascending: false });
+    setItems((data as FeedbackItem[]) || []);
     setLoading(false);
   };
 
@@ -91,13 +97,13 @@ const AdminFeedback = () => {
   const filtered = useMemo(() => {
     return items.filter((i) => {
       if (fProject !== "all" && i.project_name !== fProject) return false;
-      if (fManager !== "all" && i.manager_name !== fManager) return false;
+      if (fType !== "all" && i.manager_name !== fType) return false;
       if (fStatus !== "all" && i.status !== fStatus) return false;
       if (fCategory !== "all" && i.category !== fCategory) return false;
       if (fPriority !== "all" && i.priority !== fPriority) return false;
       return true;
     });
-  }, [items, fProject, fManager, fStatus, fCategory, fPriority]);
+  }, [items, fProject, fType, fStatus, fCategory, fPriority]);
 
   const stats = useMemo(() => {
     const s = { total: filtered.length, new: 0, in_progress: 0, done: 0, rejected: 0 } as Record<string, number>;
@@ -118,23 +124,8 @@ const AdminFeedback = () => {
     setItems((prev) => prev.filter((i) => i.id !== id));
   };
 
-  const addManager = async () => {
-    const name = newManager.trim();
-    if (!name) return;
-    const { data, error } = await supabase.from("project_managers").insert({ name }).select().single();
-    if (error) return toast({ title: "שגיאה", description: error.message, variant: "destructive" });
-    setManagers((p) => [...p, data as Manager].sort((a, b) => a.name.localeCompare(b.name)));
-    setNewManager("");
-  };
-
-  const removeManager = async (id: string) => {
-    const { error } = await supabase.from("project_managers").delete().eq("id", id);
-    if (error) return toast({ title: "שגיאה", description: error.message, variant: "destructive" });
-    setManagers((p) => p.filter((m) => m.id !== id));
-  };
-
   const exportCsv = () => {
-    const headers = ["תאריך", "לקוח", "פרויקט", "מנהל", "סקשן", "קטגוריה", "עדיפות", "סטטוס", "תיאור"];
+    const headers = ["תאריך", "לקוח", "פרויקט", "סוג", "סקשן", "קטגוריה", "עדיפות", "סטטוס", "תיאור"];
     const escape = (v: string) => `"${(v || "").replace(/"/g, '""')}"`;
     const rows = filtered.map((i) =>
       [
