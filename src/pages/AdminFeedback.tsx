@@ -242,35 +242,6 @@ const AdminFeedback = () => {
           ))}
         </div>
 
-        {/* Managers */}
-        <div className="bg-card/40 border border-border/40 rounded-lg p-4 mb-6">
-          <h3 className="text-sm font-bold mb-3">מנהלי פרויקטים</h3>
-          <div className="flex flex-wrap gap-2 mb-3">
-            {managers.map((m) => (
-              <span key={m.id} className="inline-flex items-center gap-1.5 px-3 py-1 text-xs rounded-full bg-muted/40 border border-border/40">
-                {m.name}
-                <button onClick={() => removeManager(m.id)} className="text-muted-foreground hover:text-destructive">
-                  ×
-                </button>
-              </span>
-            ))}
-            {managers.length === 0 && <span className="text-xs text-muted-foreground">אין מנהלים עדיין</span>}
-          </div>
-          <div className="flex gap-2">
-            <Input
-              placeholder="שם מנהל חדש"
-              value={newManager}
-              onChange={(e) => setNewManager(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && addManager()}
-              className="max-w-xs h-9"
-              maxLength={80}
-            />
-            <Button size="sm" onClick={addManager} className="gap-1">
-              <Plus className="w-3.5 h-3.5" /> הוסף
-            </Button>
-          </div>
-        </div>
-
         {/* Filters */}
         <div className="bg-card/40 border border-border/40 rounded-lg p-4 mb-6 grid grid-cols-2 md:grid-cols-6 gap-3">
           <div>
@@ -284,12 +255,12 @@ const AdminFeedback = () => {
             </Select>
           </div>
           <div>
-            <Label className="text-xs text-muted-foreground">מנהל</Label>
-            <Select value={fManager} onValueChange={setFManager}>
+            <Label className="text-xs text-muted-foreground">סוג פרויקט</Label>
+            <Select value={fType} onValueChange={setFType}>
               <SelectTrigger className="h-9"><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">הכל</SelectItem>
-                {managers.map((m) => <SelectItem key={m.id} value={m.name}>{m.name}</SelectItem>)}
+                {PROJECT_TYPES.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
