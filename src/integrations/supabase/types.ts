@@ -14,7 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      feedback_items: {
+        Row: {
+          category: string
+          client_name: string
+          created_at: string
+          description: string
+          id: string
+          manager_name: string | null
+          priority: string
+          project_name: string
+          section: string
+          section_custom: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          client_name: string
+          created_at?: string
+          description: string
+          id?: string
+          manager_name?: string | null
+          priority?: string
+          project_name: string
+          section: string
+          section_custom?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          client_name?: string
+          created_at?: string
+          description?: string
+          id?: string
+          manager_name?: string | null
+          priority?: string
+          project_name?: string
+          section?: string
+          section_custom?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      feedback_projects: {
+        Row: {
+          archived: boolean
+          created_at: string
+          id: string
+          manager_name: string | null
+          name: string
+        }
+        Insert: {
+          archived?: boolean
+          created_at?: string
+          id?: string
+          manager_name?: string | null
+          name: string
+        }
+        Update: {
+          archived?: boolean
+          created_at?: string
+          id?: string
+          manager_name?: string | null
+          name?: string
+        }
+        Relationships: []
+      }
+      project_managers: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
