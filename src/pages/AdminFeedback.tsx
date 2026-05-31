@@ -212,7 +212,7 @@ const AdminFeedback = () => {
       <div className="max-w-7xl mx-auto">
         <header className="flex items-center justify-between flex-wrap gap-4 mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">דשבורד פידבק</h1>
+            <h1 className="text-3xl font-bold text-foreground tracking-wider">FEEDBACK MANAGEMENT</h1>
             <p className="text-sm text-muted-foreground mt-1">ניהול פנימי · אינו מקושר מהאתר</p>
           </div>
           <div className="flex gap-2">
