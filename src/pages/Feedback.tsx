@@ -265,10 +265,10 @@ const Feedback = () => {
       </div>
 
       <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
-        <AlertDialogContent dir="rtl" className="text-right">
-          <AlertDialogHeader>
-            <AlertDialogTitle>בטוח שתרצה לשלוח את הטופס בשלב זה?</AlertDialogTitle>
-            <AlertDialogDescription className="space-y-3">
+        <AlertDialogContent dir="rtl" className="text-center">
+          <AlertDialogHeader className="sm:text-center">
+            <AlertDialogTitle className="text-center">בטוח שתרצה לשלוח את הטופס בשלב זה?</AlertDialogTitle>
+            <AlertDialogDescription className="space-y-3 text-center">
               <span className="block">
                 לאחר השליחה ההערות נשלחות לאישור. אם יש לך הערות נוספות שתרצה להוסיף, השתמש/י בכפתור שמופיע
                 למעלה:
@@ -280,8 +280,8 @@ const Feedback = () => {
               </span>
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>חזרה לטופס</AlertDialogCancel>
+          <AlertDialogFooter className="flex-row justify-center gap-2 sm:justify-center">
+            <AlertDialogCancel className="mt-0">חזרה לטופס</AlertDialogCancel>
             <AlertDialogAction onClick={submit}>כן, שלח את ההערות</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
