@@ -152,8 +152,12 @@ const Feedback = () => {
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-primary">הערות ({notes.length})</h2>
-            <Button onClick={addNote} variant="outline" size="sm" className="gap-1">
-              <Plus className="w-4 h-4" /> הוסף הערה
+            <Button
+              onClick={addNote}
+              size="sm"
+              className="gap-1 bg-primary text-primary-foreground hover:bg-primary/90 shadow-md shadow-primary/30"
+            >
+              <Plus className="w-4 h-4" /> הוסף הערה נוספת
             </Button>
           </div>
 
