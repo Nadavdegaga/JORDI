@@ -5,6 +5,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { toast } from "@/hooks/use-toast";
 import { Plus, Trash2, Send } from "lucide-react";
 
@@ -71,6 +81,7 @@ const Feedback = () => {
   const [projectType, setProjectType] = useState("");
   const [notes, setNotes] = useState<NoteItem[]>([emptyNote()]);
   const [sending, setSending] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   useEffect(() => {
     document.title = "Review Your Project";
@@ -84,7 +95,8 @@ const Feedback = () => {
   const removeNote = (idx: number) =>
     setNotes((p) => (p.length === 1 ? p : p.filter((_, i) => i !== idx)));
 
-  const submit = async () => {
+  // Validate first; only open the confirmation dialog if the form is ready to send.
+  const requestSubmit = () => {
     if (!clientName.trim() || !projectName.trim()) {
       toast({ title: "חסרים פרטים", description: "נא למלא שם ושם פרויקט", variant: "destructive" });
       return;
@@ -94,6 +106,13 @@ const Feedback = () => {
       toast({ title: "אין הערות", description: "נא להוסיף לפחות הערה אחת מלאה", variant: "destructive" });
       return;
     }
+    setConfirmOpen(true);
+  };
+
+  const submit = async () => {
+    setConfirmOpen(false);
+    const valid = notes.filter((n) => n.section && n.description.trim());
+    if (valid.length === 0) return;
     setSending(true);
     const rows = valid.map((n) => ({
       client_name: clientName.trim().slice(0, 100),
@@ -238,12 +257,35 @@ const Feedback = () => {
         </section>
 
         <div className="mt-8 flex justify-center">
-          <Button onClick={submit} disabled={sending} size="lg" className="gap-2 min-w-[200px]">
+          <Button onClick={requestSubmit} disabled={sending} size="lg" className="gap-2 min-w-[200px]">
             <Send className="w-4 h-4" />
             {sending ? "שולח..." : "שלח את כל ההערות"}
           </Button>
         </div>
       </div>
+
+      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <AlertDialogContent dir="rtl" className="text-right">
+          <AlertDialogHeader>
+            <AlertDialogTitle>בטוח שתרצה לשלוח את הטופס בשלב זה?</AlertDialogTitle>
+            <AlertDialogDescription className="space-y-3">
+              <span className="block">
+                לאחר השליחה ההערות נשלחות לאישור. אם יש לך הערות נוספות שתרצה להוסיף, השתמש/י בכפתור שמופיע
+                למעלה:
+              </span>
+              <span className="flex justify-center py-1">
+                <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-sm font-medium bg-primary/20 border border-primary text-primary">
+                  <Plus className="w-4 h-4" /> הוסף הערה נוספת
+                </span>
+              </span>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>חזרה לטופס</AlertDialogCancel>
+            <AlertDialogAction onClick={submit}>כן, שלח את ההערות</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
