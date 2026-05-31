@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import UAEBrief from "./pages/UAEBrief";
 import NotFound from "./pages/NotFound";
 import FloatingContact from "./components/FloatingContact";
+import Feedback from "./pages/Feedback";
+import AdminFeedback from "./pages/AdminFeedback";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +23,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/business-brief" element={<UAEBrief />} />
           <Route path="/uae-brief" element={<UAEBrief />} />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/admin-feedback" element={<AdminFeedback />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
