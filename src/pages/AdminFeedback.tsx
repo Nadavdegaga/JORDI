@@ -1,11 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
-import { Trash2, Download, Plus, RefreshCw } from "lucide-react";
+import { Trash2, Download, RefreshCw } from "lucide-react";
 
 type FeedbackItem = {
   id: string;
@@ -21,7 +20,16 @@ type FeedbackItem = {
   created_at: string;
 };
 
-type Manager = { id: string; name: string };
+const PROJECT_TYPES = [
+  "דף נחיתה",
+  "אתר תדמית",
+  "חנות",
+  "מערכת סגורה",
+  "מערכת ניהול",
+  "אוטומציות",
+  "תשתית אינטגרטיבית",
+  "אחר",
+];
 
 const CATEGORY_LABEL: Record<string, string> = {
   design: "🎨 עיצוב",
@@ -55,13 +63,11 @@ const STATUSES = [
 
 const AdminFeedback = () => {
   const [items, setItems] = useState<FeedbackItem[]>([]);
-  const [managers, setManagers] = useState<Manager[]>([]);
-  const [newManager, setNewManager] = useState("");
   const [loading, setLoading] = useState(true);
 
   // Filters
   const [fProject, setFProject] = useState<string>("all");
-  const [fManager, setFManager] = useState<string>("all");
+  const [fType, setFType] = useState<string>("all");
   const [fStatus, setFStatus] = useState<string>("all");
   const [fCategory, setFCategory] = useState<string>("all");
   const [fPriority, setFPriority] = useState<string>("all");
@@ -69,12 +75,11 @@ const AdminFeedback = () => {
 
   const load = async () => {
     setLoading(true);
-    const [a, b] = await Promise.all([
-      supabase.from("feedback_items").select("*").order("created_at", { ascending: false }),
-      supabase.from("project_managers").select("*").order("name"),
-    ]);
-    setItems((a.data as FeedbackItem[]) || []);
-    setManagers((b.data as Manager[]) || []);
+    const { data } = await supabase
+      .from("feedback_items")
+      .select("*")
+      .order("created_at", { ascending: false });
+    setItems((data as FeedbackItem[]) || []);
     setLoading(false);
   };
 
@@ -91,13 +96,13 @@ const AdminFeedback = () => {
   const filtered = useMemo(() => {
     return items.filter((i) => {
       if (fProject !== "all" && i.project_name !== fProject) return false;
-      if (fManager !== "all" && i.manager_name !== fManager) return false;
+      if (fType !== "all" && i.manager_name !== fType) return false;
       if (fStatus !== "all" && i.status !== fStatus) return false;
       if (fCategory !== "all" && i.category !== fCategory) return false;
       if (fPriority !== "all" && i.priority !== fPriority) return false;
       return true;
     });
-  }, [items, fProject, fManager, fStatus, fCategory, fPriority]);
+  }, [items, fProject, fType, fStatus, fCategory, fPriority]);
 
   const stats = useMemo(() => {
     const s = { total: filtered.length, new: 0, in_progress: 0, done: 0, rejected: 0 } as Record<string, number>;
@@ -118,23 +123,8 @@ const AdminFeedback = () => {
     setItems((prev) => prev.filter((i) => i.id !== id));
   };
 
-  const addManager = async () => {
-    const name = newManager.trim();
-    if (!name) return;
-    const { data, error } = await supabase.from("project_managers").insert({ name }).select().single();
-    if (error) return toast({ title: "שגיאה", description: error.message, variant: "destructive" });
-    setManagers((p) => [...p, data as Manager].sort((a, b) => a.name.localeCompare(b.name)));
-    setNewManager("");
-  };
-
-  const removeManager = async (id: string) => {
-    const { error } = await supabase.from("project_managers").delete().eq("id", id);
-    if (error) return toast({ title: "שגיאה", description: error.message, variant: "destructive" });
-    setManagers((p) => p.filter((m) => m.id !== id));
-  };
-
   const exportCsv = () => {
-    const headers = ["תאריך", "לקוח", "פרויקט", "מנהל", "סקשן", "קטגוריה", "עדיפות", "סטטוס", "תיאור"];
+    const headers = ["תאריך", "לקוח", "פרויקט", "סוג", "סקשן", "קטגוריה", "עדיפות", "סטטוס", "תיאור"];
     const escape = (v: string) => `"${(v || "").replace(/"/g, '""')}"`;
     const rows = filtered.map((i) =>
       [
@@ -251,35 +241,6 @@ const AdminFeedback = () => {
           ))}
         </div>
 
-        {/* Managers */}
-        <div className="bg-card/40 border border-border/40 rounded-lg p-4 mb-6">
-          <h3 className="text-sm font-bold mb-3">מנהלי פרויקטים</h3>
-          <div className="flex flex-wrap gap-2 mb-3">
-            {managers.map((m) => (
-              <span key={m.id} className="inline-flex items-center gap-1.5 px-3 py-1 text-xs rounded-full bg-muted/40 border border-border/40">
-                {m.name}
-                <button onClick={() => removeManager(m.id)} className="text-muted-foreground hover:text-destructive">
-                  ×
-                </button>
-              </span>
-            ))}
-            {managers.length === 0 && <span className="text-xs text-muted-foreground">אין מנהלים עדיין</span>}
-          </div>
-          <div className="flex gap-2">
-            <Input
-              placeholder="שם מנהל חדש"
-              value={newManager}
-              onChange={(e) => setNewManager(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && addManager()}
-              className="max-w-xs h-9"
-              maxLength={80}
-            />
-            <Button size="sm" onClick={addManager} className="gap-1">
-              <Plus className="w-3.5 h-3.5" /> הוסף
-            </Button>
-          </div>
-        </div>
-
         {/* Filters */}
         <div className="bg-card/40 border border-border/40 rounded-lg p-4 mb-6 grid grid-cols-2 md:grid-cols-6 gap-3">
           <div>
@@ -293,12 +254,12 @@ const AdminFeedback = () => {
             </Select>
           </div>
           <div>
-            <Label className="text-xs text-muted-foreground">מנהל</Label>
-            <Select value={fManager} onValueChange={setFManager}>
+            <Label className="text-xs text-muted-foreground">סוג פרויקט</Label>
+            <Select value={fType} onValueChange={setFType}>
               <SelectTrigger className="h-9"><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">הכל</SelectItem>
-                {managers.map((m) => <SelectItem key={m.id} value={m.name}>{m.name}</SelectItem>)}
+                {PROJECT_TYPES.map((t) => <SelectItem key={t} value={t}>{t}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
