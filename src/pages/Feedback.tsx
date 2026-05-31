@@ -8,6 +8,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "@/hooks/use-toast";
 import { Plus, Trash2, Send } from "lucide-react";
 
+const PROJECT_TYPES = [
+  "דף נחיתה",
+  "אתר תדמית",
+  "חנות",
+  "מערכת סגורה",
+  "מערכת ניהול",
+  "אוטומציות",
+  "תשתית אינטגרטיבית",
+  "אחר",
+];
+
 const SECTIONS = [
   "Hero / ראש הדף",
   "אודות",
@@ -57,18 +68,12 @@ const emptyNote = (): NoteItem => ({
 const Feedback = () => {
   const [clientName, setClientName] = useState("");
   const [projectName, setProjectName] = useState("");
-  const [managerName, setManagerName] = useState("");
-  const [managers, setManagers] = useState<{ id: string; name: string }[]>([]);
+  const [projectType, setProjectType] = useState("");
   const [notes, setNotes] = useState<NoteItem[]>([emptyNote()]);
   const [sending, setSending] = useState(false);
 
   useEffect(() => {
-    document.title = "פידבק לפרויקט";
-    supabase
-      .from("project_managers")
-      .select("*")
-      .order("name")
-      .then(({ data }) => setManagers(data || []));
+    document.title = "Review Your Project";
   }, []);
 
   const updateNote = (idx: number, patch: Partial<NoteItem>) => {
@@ -93,7 +98,7 @@ const Feedback = () => {
     const rows = valid.map((n) => ({
       client_name: clientName.trim().slice(0, 100),
       project_name: projectName.trim().slice(0, 150),
-      manager_name: managerName || null,
+      manager_name: projectType || null,
       section: n.section,
       section_custom: n.section === "אחר" ? n.section_custom.slice(0, 150) : null,
       category: n.category,
@@ -115,7 +120,7 @@ const Feedback = () => {
     <div dir="rtl" className="min-h-screen bg-background text-foreground py-12 px-4">
       <div className="max-w-3xl mx-auto">
         <header className="mb-10 text-center">
-          <h1 className="text-4xl font-bold text-foreground mb-3">פידבק לפרויקט</h1>
+          <h1 className="text-4xl font-bold text-foreground mb-3 tracking-wider">REVIEW YOUR PROJECT</h1>
           <p className="text-muted-foreground">שתפו אותנו במה שצריך לשנות, להוסיף או לשפר</p>
         </header>
 
@@ -131,15 +136,12 @@ const Feedback = () => {
               <Input value={projectName} onChange={(e) => setProjectName(e.target.value)} maxLength={150} />
             </div>
             <div className="space-y-1.5">
-              <Label className="text-xs text-muted-foreground">מנהל הפרויקט</Label>
-              <Select value={managerName} onValueChange={setManagerName}>
-                <SelectTrigger><SelectValue placeholder="בחר/י" /></SelectTrigger>
+              <Label className="text-xs text-muted-foreground">סוג הפרויקט</Label>
+              <Select value={projectType} onValueChange={setProjectType}>
+                <SelectTrigger><SelectValue placeholder="בחר/י סוג" /></SelectTrigger>
                 <SelectContent>
-                  {managers.length === 0 && (
-                    <div className="px-3 py-2 text-xs text-muted-foreground">אין מנהלים — הוסיפו מהדשבורד</div>
-                  )}
-                  {managers.map((m) => (
-                    <SelectItem key={m.id} value={m.name}>{m.name}</SelectItem>
+                  {PROJECT_TYPES.map((t) => (
+                    <SelectItem key={t} value={t}>{t}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
