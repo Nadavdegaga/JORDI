@@ -3,6 +3,35 @@ import { Link } from "react-router-dom";
 import { ExternalLink, Mail } from "lucide-react";
 import { CONTACT_EMAIL } from "@/config/landing";
 import { trackCustom } from "@/lib/pixel";
+import { getMainSiteUrl, isCampaignHost } from "@/lib/host";
+
+const linkClass =
+  "inline-flex items-center gap-1.5 text-muted-foreground/60 hover:text-primary transition-colors duration-300";
+
+/** Points at the main site, crossing hosts when served from lp.<domain>. */
+const MainSiteLink = () => {
+  const onClick = () => trackCustom("MainSiteClick", { from: "landing_footer" });
+  const label = (
+    <>
+      <ExternalLink className="w-3.5 h-3.5" />
+      לאתר המלא
+    </>
+  );
+
+  if (isCampaignHost()) {
+    return (
+      <a href={getMainSiteUrl()} onClick={onClick} className={linkClass}>
+        {label}
+      </a>
+    );
+  }
+
+  return (
+    <Link to="/" onClick={onClick} className={linkClass}>
+      {label}
+    </Link>
+  );
+};
 
 /**
  * Compact footer. The privacy notice is not decoration: the page runs a Meta
@@ -44,15 +73,10 @@ const LandingFooter = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs">
             {/* One-way link: the landing page points at the main site, but the
-                main site never links back here — /lp is for ad traffic only. */}
-            <Link
-              to="/"
-              onClick={() => trackCustom("MainSiteClick", { from: "landing_footer" })}
-              className="inline-flex items-center gap-1.5 text-muted-foreground/60 hover:text-primary transition-colors duration-300"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              לאתר המלא
-            </Link>
+                main site never links back here. On the campaign subdomain this
+                crosses hosts, so it must be a plain anchor — a router Link
+                would just re-render the landing page at its own root. */}
+            <MainSiteLink />
             <button
               onClick={() => setDoc({ title: "מדיניות פרטיות", items: PRIVACY })}
               className="text-muted-foreground/60 hover:text-primary transition-colors duration-300 cursor-pointer"
