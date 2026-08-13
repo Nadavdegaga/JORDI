@@ -23,16 +23,21 @@ const PackageCard = ({ pkg, index }: { pkg: Package; index: number }) => (
         </span>
       )}
 
-      <h3 className="text-2xl font-medium text-foreground mb-2">{pkg.name}</h3>
+      {/* Package names, notes and audience lines wrap to different line counts.
+          Reserving each zone's tallest height from md up — where cards sit side
+          by side — keeps prices, dividers and feature lists on the same
+          baseline across all four cards. Below md there is one card per row,
+          so the reservations are dropped to avoid dead space. */}
+      <h3 className="text-2xl font-medium text-foreground mb-2 md:min-h-[4rem]">{pkg.name}</h3>
       <p className="text-sm text-muted-foreground mb-6 min-h-[2.5rem]">{pkg.tagline}</p>
 
       <div className="mb-1">
         <span className="text-xs text-muted-foreground">החל מ־</span>
         <span className="text-4xl font-bold text-gradient-gold mx-1">{formatPrice(pkg.priceFrom)}</span>
       </div>
-      <p className="text-xs text-muted-foreground/70 mb-6">{pkg.priceNote}</p>
+      <p className="text-xs text-muted-foreground/70 mb-6 md:min-h-[2rem]">{pkg.priceNote}</p>
 
-      <div className="flex flex-col gap-2 pb-6 mb-6 border-b border-border/40">
+      <div className="flex flex-col gap-2 pb-6 mb-6 border-b border-border/40 md:min-h-[4.75rem]">
         <span className="inline-flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
           <Users className="w-3.5 h-3.5 text-primary/60 shrink-0 mt-0.5" />
           {pkg.bestFor}
