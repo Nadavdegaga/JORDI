@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Mail } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ExternalLink, Mail } from "lucide-react";
 import { CONTACT_EMAIL } from "@/config/landing";
+import { trackCustom } from "@/lib/pixel";
 
 /**
  * Compact footer. The privacy notice is not decoration: the page runs a Meta
@@ -40,7 +42,17 @@ const LandingFooter = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-5 text-xs">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs">
+            {/* One-way link: the landing page points at the main site, but the
+                main site never links back here — /lp is for ad traffic only. */}
+            <Link
+              to="/"
+              onClick={() => trackCustom("MainSiteClick", { from: "landing_footer" })}
+              className="inline-flex items-center gap-1.5 text-muted-foreground/60 hover:text-primary transition-colors duration-300"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              לאתר המלא
+            </Link>
             <button
               onClick={() => setDoc({ title: "מדיניות פרטיות", items: PRIVACY })}
               className="text-muted-foreground/60 hover:text-primary transition-colors duration-300 cursor-pointer"
