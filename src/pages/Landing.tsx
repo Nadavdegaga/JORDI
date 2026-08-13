@@ -47,9 +47,19 @@ const Landing = () => {
     const previousDescription = meta?.getAttribute("content") ?? "";
     meta?.setAttribute("content", PAGE_DESCRIPTION);
 
+    // Campaign traffic only: this page must never surface in search results
+    // alongside the main site. The X-Robots-Tag header in vercel.json is the
+    // primary control (it works without JS); this tag covers crawlers that
+    // render the DOM instead of reading headers.
+    const robots = document.createElement("meta");
+    robots.name = "robots";
+    robots.content = "noindex, nofollow";
+    document.head.appendChild(robots);
+
     return () => {
       document.title = previousTitle;
       meta?.setAttribute("content", previousDescription);
+      robots.remove();
     };
   }, []);
 
