@@ -91,7 +91,7 @@ const AccessibilityWidget = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1.5, duration: 0.5 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full border border-primary/30 bg-background/80 backdrop-blur-md flex items-center justify-center text-primary hover:bg-primary/10 hover:border-primary/60 transition-all duration-500 shadow-lg shadow-primary/10 cursor-pointer"
+        className="a11y-fab fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full border border-primary/30 bg-background/80 backdrop-blur-md flex items-center justify-center text-primary hover:bg-primary/10 hover:border-primary/60 transition-all duration-500 shadow-lg shadow-primary/10 cursor-pointer"
         aria-label="תפריט נגישות"
       >
         <Accessibility className="w-5 h-5" />

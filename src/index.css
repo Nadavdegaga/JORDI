@@ -179,6 +179,19 @@
   }
 }
 
+/* The landing page's sticky conversion bar occupies the bottom of the mobile
+   viewport, so the accessibility button moves above it rather than sitting on
+   top of the CTA — the button has to stay reachable at all times. */
+body.has-sticky-cta .a11y-fab {
+  bottom: 5.75rem;
+}
+
+@media (min-width: 768px) {
+  body.has-sticky-cta .a11y-fab {
+    bottom: 1.5rem;
+  }
+}
+
 /* ========== Accessibility overrides ========== */
 
 /* Font size scaling */
