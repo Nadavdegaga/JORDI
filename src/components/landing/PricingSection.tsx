@@ -31,13 +31,19 @@ const PackageCard = ({ pkg, index }: { pkg: Package; index: number }) => (
       <h3 className="text-2xl font-medium text-foreground mb-2 md:min-h-[4rem]">{pkg.name}</h3>
       <p className="text-sm text-muted-foreground mb-6 min-h-[2.5rem]">{pkg.tagline}</p>
 
+      {/* Label and amount are forced onto separate lines. Inline, a wider
+          amount (₪35,000) pushes the label to its own line while a narrower
+          one (₪2,500) keeps it alongside — making the block one line tall in
+          some cards and two in others, at widths that vary with the viewport. */}
       <div className="mb-1">
-        <span className="text-xs text-muted-foreground">החל מ־</span>
-        <span className="text-4xl font-bold text-gradient-gold mx-1">{formatPrice(pkg.priceFrom)}</span>
+        <span className="block text-xs text-muted-foreground">החל מ־</span>
+        <span className="block text-4xl font-bold text-gradient-gold whitespace-nowrap">
+          {formatPrice(pkg.priceFrom)}
+        </span>
       </div>
       <p className="text-xs text-muted-foreground/70 mb-6 md:min-h-[2rem]">{pkg.priceNote}</p>
 
-      <div className="flex flex-col gap-2 pb-6 mb-6 border-b border-border/40 md:min-h-[4.75rem]">
+      <div className="flex flex-col gap-2 pb-6 mb-6 border-b border-border/40 md:min-h-[5.5rem]">
         <span className="inline-flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
           <Users className="w-3.5 h-3.5 text-primary/60 shrink-0 mt-0.5" />
           {pkg.bestFor}
@@ -53,14 +59,18 @@ const PackageCard = ({ pkg, index }: { pkg: Package; index: number }) => (
         ))}
       </ul>
 
+      {/* One label for all four cards. Per-package labels varied in length, so
+          the longest wrapped to two lines and left that button taller than its
+          neighbours. The package is still identified to the pixel and inside
+          the WhatsApp message via packageId/packageName. */}
       <LeadCta
-        label={`מתעניין ב${pkg.name}`}
+        label="לפרטים ולהצעת מחיר"
         source={`pricing_${pkg.id}`}
         packageId={pkg.id}
         packageName={pkg.name}
         value={pkg.priceFrom}
         variant={pkg.featured ? "solid" : "outline"}
-        className="w-full"
+        className="w-full min-h-[3.5rem]"
       />
     </div>
   </AnimatedSection>
